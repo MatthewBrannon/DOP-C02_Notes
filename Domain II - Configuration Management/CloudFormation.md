@@ -10,7 +10,7 @@
 - CloudFormation enables you to build custom extensions to your stack template using AWS [[Lambda]].
 - **CloudFormation registry** helps you discover and provision private and public extensions such as resources, modules, and hooks in your AWS CloudFormation templates.
 
-## **CloudFormation vs Elastic Beanstalk**
+## **CloudFormation vs [[Elastic Beanstalk]]**
 
 - [[Elastic Beanstalk]] provides an **environment** to easily **deploy and run** applications in the cloud.
 - CloudFormation is a convenient **provisioning mechanism** for a broad range of AWS resources.
@@ -57,7 +57,7 @@
 - Template macros enable you to perform custom processing on templates, from simple actions like find-and-replace operations to extensive transformations of entire templates.
 - Modules are building blocks that can be reused across different CloudFormation templates.
 - You can use regular expressions when creating a template parameter.
-- You can use CloudFormation to perform ECS blue/green deployments via AWS CodeDeploy.
+- You can use CloudFormation to perform [[ECS]] blue/green deployments via AWS [[CodeDeploy]].
 
 ## **StackSets**
 
@@ -70,7 +70,7 @@
 - Stack set operations options – Maximum concurrent accounts, failure tolerance, retain stacks, and region concurrency.
 - Tags – You can add tags during stack set creation and update operations by specifying key and value pairs.
 - For stack set operations and stack instances, StackSets generates status codes.
-- You can configure an account gate or Lambda function to verify a target account meets certain requirements before it begins stack operations.
+- You can configure an account gate or [[Lambda]] function to verify a target account meets certain requirements before it begins stack operations.
 - You can also perform drift detection on a stack set to determine if any of the stack instances have drifted.
 - Stack import operations:
     - Self-managed StackSets – Stacks can be imported into the administrator account or into other target accounts and AWS Regions.
@@ -78,7 +78,7 @@
 
 ## **AWS CloudFormation Monitoring**
 
-- CloudFormation is integrated with AWS CloudTrail, a service that provides a record of actions taken by a user, role, or an AWS service in CloudFormation. CloudTrail captures all API calls for CloudFormation as events, including calls from the CloudFormation console and from code calls to the CloudFormation APIs.
+- CloudFormation is integrated with AWS [[CloudTrail]], a service that provides a record of actions taken by a user, role, or an AWS service in CloudFormation. [[CloudTrail]] captures all API calls for CloudFormation as events, including calls from the CloudFormation console and from code calls to the CloudFormation APIs.
 
 ## **AWS CloudFormation Security**
 

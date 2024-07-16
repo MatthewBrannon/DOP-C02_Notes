@@ -25,7 +25,7 @@
 
 ## **Features**
 
-- - AWS X-Ray can be used with applications running on Amazon EC2, Amazon ECS, AWS Lambda, AWS Elastic Beanstalk. You just integrate the X-Ray SDK with your application and install the X-Ray agent.
+- - AWS X-Ray can be used with applications running on Amazon EC2, Amazon ECS, AWS Lambda, AWS [[Elastic Beanstalk]]. You just integrate the X-Ray SDK with your application and install the X-Ray agent.
     - AWS X-Ray provides an end-to-end, cross-service, application-centric view of requests flowing through your application by aggregating the data gathered from individual services in your application into a single unit called a _trace_.
     - The X-Ray SDK captures metadata for requests made to MySQL and PostgreSQL databases (self-hosted, Amazon RDS, Amazon Aurora), and Amazon DynamoDB. It also captures metadata for requests made to Amazon SQS and Amazon SNS.
     - You can set the **trace sampling rate** that is best suited for your production applications or applications in development. X-Ray continually traces requests made to your application and stores a sampling of the requests for your analysis.
@@ -61,7 +61,7 @@
         - AWS Lambda – Active and passive instrumentation of incoming requests on all runtimes. AWS Lambda adds two nodes to your service map, one for the AWS Lambda service, and one for the function.
         - Amazon API Gateway – Active and passive instrumentation. API Gateway uses sampling rules to determine which requests to record, and adds a node for the gateway stage to your service map.
         - Elastic Load Balancing – Request tracing on application load balancers. The application load balancer adds the trace ID to the request header before sending it to a target group.
-        - AWS Elastic Beanstalk – Tooling.
+        - AWS [[Elastic Beanstalk]] – Tooling.
 
 ## **AWS X-Ray** **Pricing**
 

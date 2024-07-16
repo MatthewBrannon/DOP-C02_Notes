@@ -33,7 +33,7 @@ Concepts:
     - AWS Lambda functions
     - Kinesis streams
     - Amazon ECS tasks
-    - Step Functions state machines
+    - [[Step Functions]] state machines
     - Amazon SNS topics
     - Amazon SQS queues
     - built-in targets

@@ -27,7 +27,7 @@
 
 ## **Features**
 
-- - API Gateway can execute Lambda code in your account, start Step Functions state machines, or make calls to Elastic Beanstalk, EC2, or web services outside of AWS with publicly accessible HTTP endpoints.
+- - API Gateway can execute Lambda code in your account, start [[Step Functions]] state machines, or make calls to [[Elastic Beanstalk]], EC2, or web services outside of AWS with publicly accessible HTTP endpoints.
     - API Gateway helps you define plans that meter and restrict third-party developer access to your APIs.
     - API Gateway helps you manage traffic to your backend systems by allowing you to set throttling rules based on the number of requests per second for each HTTP method in your APIs.
     - You can set up a cache with customizable keys and time-to-live in seconds for your API data to avoid hitting your backend services for each request.

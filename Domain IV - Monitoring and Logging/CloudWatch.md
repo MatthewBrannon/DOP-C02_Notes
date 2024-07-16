@@ -95,7 +95,7 @@
     - You can share your dashboards with users who do not have direct access to your AWS account via three ways:
         - Share a single dashboard and designate specific email addresses and passwords of the people who can view the dashboard.
         - Share a single dashboard publicly, so that anyone who has the link can view the dashboard.
-        - Share all the CloudWatch dashboards in your account and specify a third-party SSO provider for dashboard access. All users who are members of this SSO provider’s list can access the dashboards in the account. To enable this, you integrate the SSO provider with Amazon Cognito. 
+        - Share all the CloudWatch dashboards in your account and specify a third-party SSO provider for dashboard access. All users who are members of this SSO provider’s list can access the dashboards in the account. To enable this, you integrate the SSO provider with Amazon [[Cognito]]. 
 
 ## **CloudWatch Events (Amazon EventBridge)**
 

@@ -214,7 +214,7 @@
 - Queries to Alias records are provided at no additional cost to current Route 53 customers when the records are mapped to the following AWS resource types:
     - [Elastic Load Balancers](https://tutorialsdojo.com/aws-elastic-load-balancing-elb/)
     - Amazon CloudFront distributions
-    - AWS Elastic Beanstalk environments
+    - AWS [[Elastic Beanstalk]] environments
     - API Gateways
     - VPC endpoints
     - Amazon S3 buckets that are configured as website endpoints

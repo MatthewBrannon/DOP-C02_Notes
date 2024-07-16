@@ -122,7 +122,7 @@ Here are some additional important things to know about Amazon EventBridge:
 2. **Serverless application development** – Build serverless applications using EventBridge to connect event sources like APIs to event-driven compute on AWS Lambda.
 3. **Automation and workflow** – Automate tasks and build workflows using EventBridge rules to trigger actions in response to events. For example, starting an EC2 instance when a file is uploaded to S3.
 4. **Data processing** – Process streaming data by routing events from sources like Kinesis Data Streams to targets like Kinesis Data Analytics for real-time analytics.
-5. **Application monitoring** – Monitor applications by routing application events from sources like CloudWatch Logs to targets like Step Functions for orchestrating alerts and remediation workflows.
+5. **Application monitoring** – Monitor applications by routing application events from sources like CloudWatch Logs to targets like [[Step Functions]] for orchestrating alerts and remediation workflows.
 6. **Third-party integration** – Integrate SaaS applications and on-premises systems with AWS using the EventBridge API Destinations feature to exchange events bi-directionally in a secure manner.
 
 ## **Best Practices**

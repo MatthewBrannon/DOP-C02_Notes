@@ -12,7 +12,7 @@
 
 7. RDS - DR scenarios, CFN scenarios, cross-region read replicas (which engines support it).
 
-8. Elastic Beanstalk - understand ebextensions as well as the deployment types.
+8. [[Elastic Beanstalk]] - understand ebextensions as well as the deployment types.
 
 9. Understand container deployment lifecycle - ECS, ECR, and maybe EB.
 

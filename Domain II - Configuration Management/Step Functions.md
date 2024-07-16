@@ -4,7 +4,7 @@
 ## **Concepts**
 
 - - Step Functions are based on the concepts of **tasks** and **state machines**.
-        - A task performs work by using an activity or an [AWS Lambda](https://tutorialsdojo.com/aws-lambda/) function, or by passing parameters to the API actions of other services.
+        - A task performs work by using an activity or an AWS [[Lambda]] function, or by passing parameters to the API actions of other services.
         - A finite state machine can express an algorithm as a number of states, their relationships, and their input and output.
     - You define state machines using the **JSON-based Amazon States Language**.
     - A state is referred to by its _name_, which can be any string, but which must be unique within the scope of the entire state machine. An instance of a state exists until the end of its execution.

@@ -19,9 +19,6 @@
 
 - **Function** – a script or program that runs in Lambda. Lambda passes invocation events to your function. The function processes an event and returns a response.
 - **Execution environment** – a secure, isolated micro virtual machine where a Lambda function is executed.
-
-[![Tutorials dojo strip](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2024/07/TD_Mid-Year-Sale-strip-ad-extension_4July2024-scaled.webp)](https://portal.tutorialsdojo.com/shop/)
-
 - **Runtimes** – Lambda runtimes allow functions in different languages to run in the same base execution environment. The runtime sits in-between the Lambda service and your function code, relaying invocation events, context information, and responses between the two.
 - **Environment variables** – key-value pairs that you can use to store configuration settings for your function. They can be used to pass dynamic parameters to your function at runtime, such as database connection strings, API keys, and other sensitive information.
 - **Layers** – Lambda layers are a distribution mechanism for libraries, custom runtimes, and other function dependencies. Layers let you manage your in-development function code independently from the unchanging code and resources that it uses.
@@ -51,7 +48,7 @@
     - when a function is invoked synchronously, AWS Lambda waits until the function is done processing, then returns the result.
     - examples of AWS services that invoke Lambda functions synchronously:
         - [Amazon API Gateway](https://tutorialsdojo.com/amazon-api-gateway/) Application Load Balancer
-        - [Amazon Cognito](https://tutorialsdojo.com/amazon-cognito/) 
+        - [Amazon [[Cognito]]](https://tutorialsdojo.com/amazon-[[cognito]]/) 
         - [Amazon Kinesis](https://tutorialsdojo.com/amazon-kinesis/) Data Firehose
         - [Amazon CloudFront](https://tutorialsdojo.com/amazon-cloudfront/) (Lambda@Edge)
 - Asynchronous invocation
@@ -118,7 +115,7 @@
 
 ## Configuring a Lambda Function to Access Resources in a VPC
 
-In AWS Lambda, you can set up your function to establish a connection to your virtual private cloud (VPC). With this connection, your function can access the private resources of your [VPC](https://tutorialsdojo.com/amazon-vpc/) during execution like [EC2](https://tutorialsdojo.com/amazon-elastic-compute-cloud-amazon-ec2/), [RDS](https://tutorialsdojo.com/amazon-relational-database-service-amazon-rds/) and many others.
+In AWS Lambda, you can set up your function to establish a connection to your virtual private cloud (VPC). With this connection, your function can access the private resources of your VPC during execution like [[EC2]], [[RDS]] and many others.
 
 By default, AWS executes your Lambda function code securely within a VPC. Alternatively, you can enable your Lambda function to access resources inside your private VPC by providing additional VPC-specific configuration information such as VPC subnet IDs and security group IDs. It uses this information to set up elastic network interfaces which enable your Lambda function to connect securely to other resources within your VPC.
 
