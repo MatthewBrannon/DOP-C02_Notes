@@ -1,4 +1,4 @@
-## AWS Organizations Cheat Sheet
+## AWS Organizations
 
 - It offers policy-based management for multiple AWS accounts.
 
@@ -6,7 +6,7 @@
 
 - With Organizations, you can create groups of accounts and then apply policies to those groups.
 - Organizations provides you a policy framework for multiple AWS accounts. You can apply policies to a group of accounts or all the accounts in your organization.
-- AWS Organizations enables you to set up a single payment method for all the AWS accounts in your organization through **consolidated billing**. With consolidated billing, you can see a combined view of charges incurred by all your accounts, as well as take advantage of pricing benefits from aggregated usage, such as volume discounts for EC2 and S3.
+- AWS Organizations enables you to set up a single payment method for all the AWS accounts in your organization through **consolidated billing**. With consolidated billing, you can see a combined view of charges incurred by all your accounts, as well as take advantage of pricing benefits from aggregated usage, such as volume discounts for [[EC2]] and [[S3]].
 - AWS Organizations, like many other AWS services, is **eventually consistent**. It achieves high availability by replicating data across multiple servers in AWS data centers within its region.
 
 ## **Administrative Actions in Organizations**
@@ -27,8 +27,8 @@
 - An **administrative root** is the starting point for organizing your AWS accounts. The administrative root is the top-most container in your organization’s hierarchy. Under this root, you can create OUs to logically group your accounts and organize these OUs into a hierarchy that best matches your business needs.
 - An **organizational unit** (OU) is a group of AWS accounts within an organization. An OU can also contain other OUs enabling you to create a hierarchy.
 - A **policy** is a “document” with one or more statements that define the controls that you want to apply to a group of AWS accounts.
-    - **Service control policy** (SCP) is a policy that specifies the services and actions that users and roles can use in the accounts that the SCP affects. SCPs are similar to IAM permission policies except that they don’t grant any permissions. Instead, SCPs are _filters_ that allow only the specified services and actions to be used in affected accounts.
-![AWS Training AWS Organizations 2](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-AWS-Organizations-2.jpg)
+    - **Service control policy** (SCP) is a policy that specifies the services and actions that users and roles can use in the accounts that the SCP affects. SCPs are similar to [[IAM]] permission policies except that they don’t grant any permissions. Instead, SCPs are _filters_ that allow only the specified services and actions to be used in affected accounts.
+    - ![AWS Training AWS Organizations 2](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-AWS-Organizations-2.jpg)
 - AWS Organizations has two available feature sets:
     - All organizations support **consolidated billing**, which provides basic management tools that you can use to centrally manage the accounts in your organization.
     - If you enable **all features**, you continue to get all the consolidated billing features plus a set of advanced features such as service control policies.

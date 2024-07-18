@@ -1,4 +1,4 @@
-## Amazon RDS Cheat Sheet
+## Amazon RDS
 
 - Industry-standard relational database
 - RDS manages backups, software patching, automatic failure detection, and recovery.
@@ -34,9 +34,8 @@
     - Up to 10 can be SQL Server DB instances under the “License Included” model. You can have 40 DB instances for SQL Server under the “BYOL” licensing model.
     - The maximum number of databases supported on a DB instance depends on the instance class type and the availability mode—Single-AZ, Multi-AZ Database Mirroring (DBM), or Multi-AZ Availability Groups (AGs). The Microsoft SQL Server system databases don’t count toward this limit.
 
-|                              |               |                       |                                 |
-| ---------------------------- | ------------- | --------------------- | ------------------------------- |
 | **Instance Class Type**      | **Single-AZ** | **Multi-AZ with DBM** | **Multi-AZ with Always On AGs** |
+| ---------------------------- | ------------- | --------------------- | ------------------------------- |
 | db.*.micro to db.*.medium    | 30            | N/A                   | N/A                             |
 | db.*.large                   | 30            | 30                    | 30                              |
 | db.*.xlarge to db.*.16xlarge | 100           | 50                    | 75                              |
@@ -63,16 +62,15 @@
 - You can change the CPU and memory available to a DB instance by changing its DB instance class. Specify the following processor features to optimize your DB instance for specific workloads or business needs:
     - Number of CPU cores
     - Threads per core
-- Endpoint: rds._<region>_.amazonaws.com
+- Endpoint: rds._region_.amazonaws.com
 - Storage
     - Amazon RDS for MySQL, MariaDB, PostgreSQL, Oracle, and Microsoft SQL Server use Amazon EBS volumes for database and log storage.
     - Storage types :
-        
-        - - - General Purpose SSD (gp2)
+        - General Purpose SSD (gp2)
                     - MySQL, MariaDB, Oracle, and PostgreSQL DB instances: 20 GiB–64 TiB storage size
                     - SQL Server for Enterprise, Standard, Web, and Express editions: 20 GiB–16 TiB storage size
                 - Provisioned IOPS SSD (io1)
-        
+                
         |   |   |   |
         |---|---|---|
         |**Database Engine**|**Range of Provisioned IOPS**|**Range of Storage**|
@@ -82,15 +80,14 @@
         |MySQL|1,000–80,000|100 GiB–64 TiB|
         |Oracle|1,000–80,000|100 GiB–64 TiB|
         |PostgreSQL|1,000–80,000|100 GiB–64 TiB|
-        
-        - - For production OLTP use cases, use **Multi-AZ deployments** for enhanced fault tolerance with Provisioned IOPS storage for fast and predictable performance.
+		    
+        - For production OLTP use cases, use **Multi-AZ deployments** for enhanced fault tolerance with Provisioned IOPS storage for fast and predictable performance.
                 - You can use PIOPS storage with Read Replicas for MySQL, MariaDB or PostgreSQL.
             - Magnetic
                 - Doesn’t allow you to scale storage when using the SQL Server database engine.
                 - Doesn’t support elastic volumes.
                 - Limited to a maximum size of 3 TiB.
                 - Limited to a maximum of 1,000 IOPS.
-
 - Instance Lifecycle – includes creating, modifying, maintaining and upgrading, performing backups and restores, rebooting, and deleting the instance.
     - You can’t stop an **Amazon RDS for SQL Server DB** instance in a Multi-AZ configuration.
     - You can stop a DB instance for up to seven days. If you do not manually start your DB instance after seven days, your DB instance is automatically started.
@@ -109,41 +106,40 @@
 ### **Amazon Relational Database Service Security**
 
 - Security Groups
-    - **DB Security Groups** – controls access to a DB instance that is not in a VPC. By default, network access is turned off to a DB instance. This SG is for the EC2-Classic platform.
-    - **VPC Security Groups** – controls access to a DB instance inside a VPC. This SG is for the EC2-VPC platform.
-    - **EC2 Security Groups** – controls access to an EC2 instance and can be used with a DB instance.
+    - **DB Security Groups** – controls access to a DB instance that is not in a VPC. By default, network access is turned off to a DB instance. This SG is for the [[EC2]]-Classic platform.
+    - **VPC Security Groups** – controls access to a DB instance inside a VPC. This SG is for the [[EC2]]-VPC platform.
+    - **[[EC2]] Security Groups** – controls access to an [[EC2]] instance and can be used with a DB instance.
 - Practices
-    - Assign an individual **IAM** account to each person who manages RDS resources. Do not use AWS root credentials to manage RDS resources.
+    - Assign an individual **[[IAM]]** account to each person who manages RDS resources. Do not use AWS root credentials to manage RDS resources.
     - Grant each user the minimum set of permissions required to perform his or her duties.
-    - Use IAM groups to effectively manage permissions for multiple users.
-    - Rotate your IAM credentials regularly.
-    - Use **security groups** to control what IP addresses or Amazon EC2 instances can connect to your databases on a DB instance.
+    - Use [[IAM]] groups to effectively manage permissions for multiple users.
+    - Rotate your [[IAM]] credentials regularly.
+    - Use **security groups** to control what IP addresses or Amazon [[EC2]] instances can connect to your databases on a DB instance.
     - Run your DB instance in an Amazon Virtual Private Cloud (**VPC**) for the greatest possible network access control.
     - Use **Secure Socket Layer (SSL) connections** with DB instances running the MySQL, MariaDB, PostgreSQL, Oracle, or Microsoft SQL Server database engines.
     - Use RDS encryption to secure your RDS instances and snapshots at rest.
     - Use the security features of your DB engine to control who can log in to the databases on a DB instance.
-- A _resource owner_ is the AWS account that created a resource. That is, the resource owner is the AWS account of the _principal entity_ (the root account, an IAM user, or an IAM role) that authenticates the request that creates the resource.
-- A _permissions policy_ describes who has access to what. Policies attached to an IAM identity are _identity-based policies_ (IAM policies) and policies attached to a resource are _resource-based policies_. Amazon RDS supports only identity-based policies (IAM policies).
-- MySQL and PostgreSQL both support **IAM database authentication**.
+- A _resource owner_ is the AWS account that created a resource. That is, the resource owner is the AWS account of the _principal entity_ (the root account, an [[IAM]] user, or an [[IAM]] role) that authenticates the request that creates the resource.
+- A _permissions policy_ describes who has access to what. Policies attached to an [[IAM]] identity are _identity-based policies_ ([[IAM]] policies) and policies attached to a resource are _resource-based policies_. Amazon RDS supports only identity-based policies ([[IAM]] policies).
+- MySQL and PostgreSQL both support **[[IAM]] database authentication**.
 - Encryption
     - At rest and in-transit.
-    - Manage keys used for encrypted DB instances using the [AWS KMS](https://tutorialsdojo.com/aws-key-management-service-aws-kms/). KMS encryption keys are specific to the region that they are created in.
+    - Manage keys used for encrypted DB instances using the AWS [[KMS]]. [[KMS]] encryption keys are specific to the region that they are created in.
     - RDS encryption is currently available for all database engines and storage types. RDS encryption is available for most DB instance classes.
     - You can’t have an encrypted Read Replica of an unencrypted DB instance or an unencrypted Read Replica of an encrypted DB instance.
     - You can’t restore an unencrypted backup or snapshot to an encrypted DB instance.
     - You can use **SSL** from your application to encrypt a connection to a DB instance running MySQL, MariaDB, SQL Server, Oracle, or PostgreSQL.
 - Amazon RDS supports the following scenarios for accessing a DB instance in a VPC:
 
-|   |   |
-|---|---|
-|**DB Instance**|**Accessed By**|
-|In a VPC|An EC2 Instance in the Same VPC|
-|An EC2 Instance in a Different VPC|
-|An EC2 Instance Not in a VPC|
-|A Client Application Through the Internet|
-|Not in a VPC|An EC2 Instance in a VPC|
-|An EC2 Instance Not in a VPC|
-|A Client Application Through the Internet|
+| **DB Instance**                           | **Accessed By**                 |
+| ----------------------------------------- | ------------------------------- |
+| In a VPC                                  | An [[EC2]] Instance in the Same VPC |
+| An [[EC2]] Instance in a Different VPC        |                                 |
+| An [[EC2]] Instance Not in a VPC              |                                 |
+| A Client Application Through the Internet |                                 |
+| Not in a VPC                              | An [[EC2]] Instance in a VPC        |
+| An [[EC2]] Instance Not in a VPC              |                                 |
+| A Client Application Through the Internet |                                 |
 
 - Working with a DB Instance in a VPC
     - Your VPC must have **at least two subnets**. These subnets must be in two **different Availability Zones** in the region where you want to deploy your DB instance.
@@ -151,7 +147,7 @@
     - Your VPC must have a DB subnet group that you create.
     - Your VPC must have a VPC security group that allows access to the DB instance.
     - The CIDR blocks in each of your subnets must be large enough to accommodate spare IP addresses for Amazon RDS to use during maintenance activities, including failover and compute scaling.
-    - When an option group is assigned to a DB instance, it is linked to the supported platform the DB instance is on, either VPC or EC2-Classic.
+    - When an option group is assigned to a DB instance, it is linked to the supported platform the DB instance is on, either VPC or [[EC2]]-Classic.
     - If you restore a DB instance into a different VPC or onto a different platform, you must either assign the default option group to the DB instance, assign an option group that is linked to that VPC or platform, or create a new option group and assign it to the DB instance.
 
 ## **Tagging**
@@ -164,7 +160,6 @@
 ## **High Availability using Multi-AZ**
 
 - Multi-AZ deployments for **Oracle, PostgreSQL, MySQL, and MariaDB** DB instances use **Amazon’s failover technology**. **SQL Server DB** instances use **SQL Server Mirroring**.  
-    
 - **Amazon RDS for SQL Server** offers **Always On Availability Groups** for the Multi-AZ configuration in all AWS Regions. This is available for both Standard and Enterprise editions.
 - You can modify a DB instance in a Single-AZ deployment to a Multi-AZ deployment.
 - The primary DB instance switches over automatically to the standby replica if any of the following conditions occur:
@@ -201,15 +196,15 @@
 - You can restore SQL Server native backups onto SQL Server DB instances that have read replicas configured.
 - When you restore a SQL Server DB instance to a point in time, each database within that instance is restored to a point in time within 1 second of each other database within the instance.
 - You can retain Amazon RDS automated backups (system snapshots and transaction logs) when you delete a database instance.
-- You can export Amazon RDS or Amazon Aurora snapshots to Amazon S3 as Apache Parquet.
+- You can export Amazon RDS or Amazon [[Aurora]] snapshots to Amazon [[S3]] as Apache Parquet.
 
 ## **Amazon Relational Database Service Monitoring**
 
-- Amazon CloudWatch
+- Amazon [[CloudWatch]]
 - RDS Events
     - An Amazon RDS event is created when the reboot is completed.
     - Be notified when changes occur with a DB instance, DB snapshot, DB parameter group, or DB security group.
-    - Uses the Amazon Simple Notification Service (SNS) to provide notification when an Amazon RDS event occurs.
+    - Uses the Amazon [[SNS]] to provide notification when an Amazon RDS event occurs.
 - Database log files
 - Using enhanced monitoring to identify operating system issues for the following:
     - MariaDB
@@ -223,33 +218,32 @@
     - Latency – the elapsed time between the submission of an I/O request and its completion.
     - Throughput – the number of bytes each second that are transferred to or from disk.
     - Queue Depth – the number of I/O requests in the queue waiting to be serviced.
-- CloudWatch gathers metrics about CPU utilization **from the hypervisor** for a DB instance, and Enhanced Monitoring gathers its metrics **from an agent** on the instance.
+- [[CloudWatch]] gathers metrics about CPU utilization **from the hypervisor** for a DB instance, and Enhanced Monitoring gathers its metrics **from an agent** on the instance.
 - Instance Status – indicates the health of the instance. Here are some statuses:
 
-|   |   |   |
-|---|---|---|
-|**DB Instance Status**|**Billed**|**Description**|
-|available|Billed|The instance is healthy and available.|
-|backing-up|Billed|The instance is currently being backed up.|
-|creating|Not billed|The instance is being created. The instance is inaccessible while it is being created.|
-|deleting|Not billed|The instance is being deleted.|
-|failed|Not billed|The instance has failed and Amazon RDS can’t recover it. Perform a point-in-time restore to the latest restorable time of the instance to recover the data.|
-|maintenance|Billed|Amazon RDS is applying a maintenance update to the DB instance. This status is used for instance-level maintenance that RDS schedules well in advance.|
-|rebooting|Billed|The instance is being rebooted because of a customer request or an Amazon RDS process that requires the rebooting of the instance.|
-|starting|Billed for storage|The DB instance is starting.|
-|stopped|Billed for storage|The DB instance is stopped.|
-|stopping|Billed for storage|The DB instance is being stopped.|
-|storage-full|Billed|The instance has reached its storage capacity allocation. This is a critical status, and we recommend that you fix this issue immediately. To do so, scale up your storage by modifying the DB instance. To avoid this situation, set Amazon CloudWatch alarms to warn you when storage space is getting low.|
+| **DB Instance Status** | **Billed**         | **Description**                                                                                                                                                                                                                                                                                               |
+| ---------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| available              | Billed             | The instance is healthy and available.                                                                                                                                                                                                                                                                        |
+| backing-up             | Billed             | The instance is currently being backed up.                                                                                                                                                                                                                                                                    |
+| creating               | Not billed         | The instance is being created. The instance is inaccessible while it is being created.                                                                                                                                                                                                                        |
+| deleting               | Not billed         | The instance is being deleted.                                                                                                                                                                                                                                                                                |
+| failed                 | Not billed         | The instance has failed and Amazon RDS can’t recover it. Perform a point-in-time restore to the latest restorable time of the instance to recover the data.                                                                                                                                                   |
+| maintenance            | Billed             | Amazon RDS is applying a maintenance update to the DB instance. This status is used for instance-level maintenance that RDS schedules well in advance.                                                                                                                                                        |
+| rebooting              | Billed             | The instance is being rebooted because of a customer request or an Amazon RDS process that requires the rebooting of the instance.                                                                                                                                                                            |
+| starting               | Billed for storage | The DB instance is starting.                                                                                                                                                                                                                                                                                  |
+| stopped                | Billed for storage | The DB instance is stopped.                                                                                                                                                                                                                                                                                   |
+| stopping               | Billed for storage | The DB instance is being stopped.                                                                                                                                                                                                                                                                             |
+| storage-full           | Billed             | The instance has reached its storage capacity allocation. This is a critical status, and we recommend that you fix this issue immediately. To do so, scale up your storage by modifying the DB instance. To avoid this situation, set Amazon [[CloudWatch]] alarms to warn you when storage space is getting low. |
 
 - RDS **Performance Insights** monitors your DB instance load so that you can analyze and troubleshoot your database performance. You can visualize the database load and filter the load by waits, SQL statements, hosts, or users.
-- CloudTrail captures all API calls for RDS as events.
+- [[CloudTrail]] captures all API calls for RDS as events.
 
 ## RDS Proxy
 
 - Amazon RDS Proxy is a fully managed, highly available database proxy for RDS that makes applications more scalable, more resilient to database failures, and more secure.
 - RDS Proxy allows applications to pool and share connections established with the database so you won’t have to use up your database memory and compute resources just for database connections.
 - RDS Proxy lets you create multiple endpoints with their own VPC settings, enabling access to your Aurora or RDS databases from applications in a different VPC.
-- It also lets you create a read-only endpoint to connect your applications to Amazon Aurora Replicas.
+- It also lets you create a read-only endpoint to connect your applications to Amazon [[Aurora]] Replicas.
 
 ## **Amazon Relational Database Service Pricing**
 
@@ -261,9 +255,6 @@
     - **On-Demand Instances** – Pay by the hour for the DB instance hours that you use.
     - **Reserved Instances** – Reserve a DB instance for a one-year or three-year term and receive a significant discount compared to the on-demand DB instance pricing.
 - You are charged for using Enhanced Monitoring.
-
-[![AWS Exam Readiness Courses](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2022/01/td-learn-for-free-now.png)](https://portal.tutorialsdojo.com/product-category/aws/aws-digital-courses-2/aws-exam-readiness-courses/)
-
 - Amazon RDS is now billed in one-second increments for database instances and attached storage. Pricing is still listed on a per-hour basis, but bills are now calculated down to the second and show usage in decimal form. There is a 10 minute minimum charge when an instance is created, restored or started.
 
 ## **Best Practices**

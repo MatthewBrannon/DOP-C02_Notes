@@ -1,4 +1,4 @@
-## AWS Cloud Development Kit Cheat Sheet
+## AWS Cloud Development Kit
 
 - The AWS CDK is an open-source software development framework for defining cloud infrastructure in code and provisioning it through AWS [[CloudFormation]].
 - It provides a high-level object-oriented abstraction on top of AWS [[CloudFormation]] that allows you to use pre-built cloud components called _constructs_.
@@ -11,9 +11,9 @@
 - Constructs: 
     - pre-built cloud components that can be used to model and provision resources in your CDK app. They are the building blocks of your CDK infrastructure.
     - CDK constructs come in three levels of abstraction:
-        - **L1 constructs (also called CFN resources)** are low-level constructs that map directly to components that are available in [[CloudFormation]]. For example, a security group, [[S3]] bucket, or a DynamoDB table.
-- - - **L2 constructs** provide the same functionality as [[CloudFormation]] resources but with added convenience by including the default settings, repetitive code, and connecting logic that you would otherwise have to write with a native [[CloudFormation]] resource.
-- - - **L3 constructs (also called patterns)** define infrastructure that follows best practices and conventions, which can help you improve the structure and maintainability of your CDK apps. For example, you can easily build an API Gateway API backed by a [[Lambda]] function using the `_aws-apigateway.LambdaRestApi_` construct.
+        - **L1 constructs (also called CFN resources)** are low-level constructs that map directly to components that are available in [[CloudFormation]]. For example, a security group, [[S3]] bucket, or a [[DynamoDB]] table.
+- **L2 constructs** provide the same functionality as [[CloudFormation]] resources but with added convenience by including the default settings, repetitive code, and connecting logic that you would otherwise have to write with a native [[CloudFormation]] resource.
+- **L3 constructs (also called patterns)** define infrastructure that follows best practices and conventions, which can help you improve the structure and maintainability of your CDK apps. For example, you can easily build an [[API Gateway]] API backed by a [[Lambda]] function using the `_aws-apigateway.LambdaRestApi_` construct.
 - App
     - A CDK app is a container for one or more stacks. It defines the cloud resources that will be created and how they will be connected. 
 - Environment 
@@ -21,7 +21,7 @@
 - `cdk.out` directory: 
     - This directory contains the synthesizer’s output, including the [[CloudFormation]] template and asset files. cdk.context.json: This file contains context data that can be passed to the CDK app at runtime, such as environment variables and stack-specific settings. 
 - Stack drift
-    - a feature that allows you to detect and compare the actual stack resources to the expected stack resources in your CloudFormation template.
+    - a feature that allows you to detect and compare the actual stack resources to the expected stack resources in your [[CloudFormation]] template.
 
 ## **Advantages of using AWS Cloud Development Kit (CDK)**
 

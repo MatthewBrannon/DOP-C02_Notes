@@ -18,7 +18,7 @@ Allows IT administrators to create, manage, and distribute catalogs of approved 
 - Users can then launch and manage products without requiring access to AWS services/console
 - Users can only see products they are supposed to see
 
-# Trusted Advisor
+# [[Trusted Advisor]]
 Service that provides real time guidance to ensure resources are provisioned and managed correctly, following AWS best practices
 
 Categories:
@@ -29,7 +29,7 @@ Categories:
 - Fault tolerance
 - Service Limits
 
-# Systems Manager
+# [[Systems Manager]]
 - Collecting software inventory
 - Applying OS patches
 - Creating system images
@@ -48,32 +48,32 @@ Features
   - info on installed applications
 - Maintentance Window
 - Patch Manager
-  - e.g. select and deploy software across all EC2 instances
+  - e.g. select and deploy software across all [[EC2]] instances
 - Automation
   - automate repetitive IT tasks
 - Parameter Store
 
 
-# Organizations
+# [[Organizations]]
 Policy-based management for multiple AWS accounts.
 
 Accounts can be split several ways within business: Environment (dev, qa, prod), Projects, or Business Units (Sales, support, dev, etc)
 
-AWS Organizations allows you to:
+AWS [[Organizations]] allows you to:
 - Programmatically create new accounts
 - Create and maintain a group of accounts
 - Set policies on those groups
 - Set single payer, cost tracking
 
-Overrides IAM policies with an organization policy
+Overrides [[IAM]] policies with an organization policy
 
 
-# Secrets Manager
+# [[Secrets Manager]]
 Service to help protect secrets needed to access applications, service, and IT resources
 
-- Encrypts secrets at rest using your own encrpytion keys stored in KMS
+- Encrypts secrets at rest using your own encrpytion keys stored in [[KMS]]
 - Secrets can be database credentials, passwords, 3rd part API keys, any text, etc.
-- Store and control access to them with Secrets Manager Console/CLI/API/SDK
+- Store and control access to them with [[Secrets Manager]] Console/CLI/API/SDK
 - Hardcoded credentials in code is replaced with API call
 - Secrets can be rotated automatically according to your own schedule
 
@@ -85,13 +85,13 @@ Managed service:
 - Provides dashboard showing how data is accessed/moved
 - Monitors data access for anomalies
 - Generates detailed alerts when it detects risk of unauthorized access or accidental data leaks
-- Currently only protects S3, but more is planned
+- Currently only protects [[S3]], but more is planned
 
 # Certificate Manager
 Easily provision, manage, and deploy SSL/TLS certificates
 
 - Centrally manage certificates in AWS
-- Audit the use of each certificate in CloudTrail logs
+- Audit the use of each certificate in [[CloudTrail]] logs
 - Private Certificate Authority
 - AWS integration
 - Import 3rd party certificates from other CAs

@@ -1,18 +1,18 @@
-## AWS Secrets Manager Cheat Sheet
+## AWS Secrets Manager
 
 - A secret management service that enables you to easily rotate, manage, and retrieve database credentials, API keys, and other secrets throughout their lifecycle.
 
 ## **Features**
 
-- - AWS Secrets Manager encrypts secrets at rest using encryption keys that you own and store in [AWS Key Management Service](https://tutorialsdojo.com/aws-key-management-service-aws-kms/) [customer managed keys]. When you retrieve a secret, Secrets Manager decrypts the secret and transmits it securely over TLS to your local environment.
+- AWS Secrets Manager encrypts secrets at rest using encryption keys that you own and store in AWS [[KMS]] customer managed keys. When you retrieve a secret, Secrets Manager decrypts the secret and transmits it securely over TLS to your local environment.
     - You can rotate secrets on a schedule or on demand by using the Secrets Manager console, AWS SDK, or AWS CLI.
-    - Secrets Manager natively supports rotating credentials for databases hosted on Amazon RDS and [Amazon DocumentDB](https://tutorialsdojo.com/amazon-documentdb/) and clusters hosted on [Amazon Redshift](https://tutorialsdojo.com/amazon-redshift/)
-    - You can extend Secrets Manager to rotate other secrets, such as credentials for Oracle databases hosted on EC2 or OAuth refresh tokens, by using custom AWS Lambda functions.
+    - Secrets Manager natively supports rotating credentials for databases hosted on Amazon [[RDS]] and [Amazon DocumentDB](https://tutorialsdojo.com/amazon-documentdb/) and clusters hosted on [Amazon Redshift](https://tutorialsdojo.com/amazon-redshift/)
+    - You can extend Secrets Manager to rotate other secrets, such as credentials for Oracle databases hosted on [[EC2]] or OAuth refresh tokens, by using custom AWS [[Lambda]] functions.
 - A secret consists of a set of credentials (user name and password), and the connection details used to access a secured service.
 - A secret also contains **metadata** which include:
     - Basic information includes the name of the secret, a description, and the Amazon Resource Name (ARN) to serve as a unique identifier.
-    - The ARN of the AWS KMS key Secrets Manager uses to encrypt and decrypt the protected text in the secret. If you don’t provide this information, Secrets Manager uses the default AWS KMS key for the account.
-    - Information about how frequently to rotate the key and what Lambda function to use to perform the rotation.
+    - The ARN of the AWS [[KMS]] key Secrets Manager uses to encrypt and decrypt the protected text in the secret. If you don’t provide this information, Secrets Manager uses the default AWS [[KMS]] key for the account.
+    - Information about how frequently to rotate the key and what [[Lambda]] function to use to perform the rotation.
     - A user-provided set of tags. You can attach tags as key-value pairs to AWS resources for organizing, logical grouping, and cost allocation.
 - A secret can contain **versions**:
     - Although you typically only have one version of the secret active at a time, multiple versions can exist while you rotate a secret on the database or service. Whenever you change the secret, Secrets Manager creates a new version.
@@ -29,14 +29,14 @@
 
 ![AWS Secrets Manager](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2020/02/AWS-Secrets-Manager.jpg)
 
-- - The rotation function contacts the secured service authentication system and creates a new set of credentials to access the database. Secrets Manager stores these new credentials as the secret text in a new version of the secret with the AWSPENDING staging label attached.
+- The rotation function contacts the secured service authentication system and creates a new set of credentials to access the database. Secrets Manager stores these new credentials as the secret text in a new version of the secret with the AWSPENDING staging label attached.
     - The rotation function then tests the AWSPENDING version of the secret to ensure that the credentials work, and grants the required level of access to the secured service.
     - If the tests succeed, the rotation function then moves the label AWSCURRENT to the new version to mark it as the default version. Then, all of the clients start using this version of the secret instead of the old version. The function also assigns the label AWSPREVIOUS to the old version. The version that had AWSPREVIOUS staging label now has no label, and therefore deprecated.
 - Network Setup for Secret Rotation
-    - When rotating secrets on natively supported services, Secrets Manager uses CloudFormation to build the rotation function and configure the network connection between the two.
-        - If your protected database service **runs in a VPC and is not publicly accessible**, then the CloudFormation template configures the **Lambda rotation function to run in the same VPC**. The rotation function can communicate with the protected service **directly within the VPC**.
-        - If you run your protected service as a **publicly accessible resource**, in a VPC or not, then the CloudFormation template configures the **Lambda rotation function not to run in a VPC**. The Lambda rotation function communicates with the protected service **through the publicly accessible connection point**.
-    - By default, the Secrets Manager endpoints run on the public Internet. If you run your Lambda rotation function and protected database or service in a VPC, then you must perform one of the following steps:
+    - When rotating secrets on natively supported services, Secrets Manager uses [[CloudFormation]] to build the rotation function and configure the network connection between the two.
+        - If your protected database service **runs in a VPC and is not publicly accessible**, then the [[CloudFormation]] template configures the **[[Lambda]] rotation function to run in the same VPC**. The rotation function can communicate with the protected service **directly within the VPC**.
+        - If you run your protected service as a **publicly accessible resource**, in a VPC or not, then the [[CloudFormation]] template configures the **[[Lambda]] rotation function not to run in a VPC**. The [[Lambda]] rotation function communicates with the protected service **through the publicly accessible connection point**.
+    - By default, the Secrets Manager endpoints run on the public Internet. If you run your [[Lambda]] rotation function and protected database or service in a VPC, then you must perform one of the following steps:
         - **Add a NAT gateway to your VPC**. This enables traffic that originates in your VPC to reach the public Secrets Manager endpoint. 
         - **Configure Secrets Manager service endpoints directly within your VPC**. This configures your VPC to intercept any request addressed to the public regional endpoint, and redirect the request to the private service endpoint running within your VPC.
 - You can create two secrets that have different permissions
@@ -46,9 +46,9 @@
 
 ## **AWS Secrets Manager Security**
 
-- - By default, Secrets Manager does not write or cache the secret to persistent storage.
+- By default, Secrets Manager does not write or cache the secret to persistent storage.
     - By default, Secrets Manager only accepts requests from hosts that use the open standard Transport Layer Security (TLS) and Perfect Forward Secrecy.
-    - You can control access to the secret using AWS Identity and Access Management (IAM) policies. 
+    - You can control access to the secret using AWS [[IAM]] policies. 
     - You can tag secrets individually and apply tag-based access controls.
     - You can configure VPC endpoints to keep traffic between your VPC and Secrets Manager within the AWS network.
     - Secrets Manager does not immediately delete secrets. Instead, Secrets Manager immediately makes the secrets inaccessible and scheduled for deletion after a recovery window of a **minimum of seven days**. Until the recovery window ends, you can recover a secret you previously deleted. 
@@ -56,8 +56,8 @@
 
 ## **AWS Secrets Manager Compliance**
 
-- - Secrets Manager is HIPAA, PCI DSS and ISO, SOC, FedRAMP, DoD SRG, IRAP, and OSPAR compliant.
+- Secrets Manager is HIPAA, PCI DSS and ISO, SOC, FedRAMP, DoD SRG, IRAP, and OSPAR compliant.
 
 ## **AWS Secrets Manager Pricing**
 
-- - You pay based on the number of secrets stored and API calls made per month.
+- You pay based on the number of secrets stored and API calls made per month.

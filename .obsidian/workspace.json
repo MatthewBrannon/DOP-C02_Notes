@@ -4,22 +4,43 @@
     "type": "split",
     "children": [
       {
-        "id": "d70fadf2c51a596f",
+        "id": "9c18e4383c5aa28c",
         "type": "tabs",
         "children": [
           {
-            "id": "a3076810e239a0c6",
+            "id": "d46c4b1caf79dd86",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Domain II - Configuration Management/Step Functions.md",
+                "file": "Domain III - Resilient Cloud Solutions/ECS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c37b38118ad2c518",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
+          },
+          {
+            "id": "fba0fd0134993b5b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Domain VI - Security and Compliance/IAM.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +106,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Domain II - Configuration Management/Step Functions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,9 +122,8 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Domain II - Configuration Management/Step Functions.md",
                 "linksCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               }
             }
           },
@@ -124,9 +143,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Domain II - Configuration Management/Step Functions.md"
-              }
+              "state": {}
             }
           },
           {
@@ -137,7 +154,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -154,15 +172,33 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "a3076810e239a0c6",
+  "active": "c37b38118ad2c518",
   "lastOpenFiles": [
-    "Domain II - Configuration Management/SAM.md",
-    "Domain III - Resilient Cloud Solutions/API Gateway.md",
-    "Domain II - Configuration Management/Elastic Beanstalk.md",
-    "Domain III - Resilient Cloud Solutions/Lambda.md",
-    "Domain III - Resilient Cloud Solutions/RDS.md",
-    "Cognito.md",
-    "Domain II - Configuration Management/CloudFormation.md",
-    "Domain II - Configuration Management/CDK.md"
+    "README.md",
+    "Domain III - Resilient Cloud Solutions/Redshift.md",
+    "[IAM.md",
+    "API Gateways.md",
+    "Domain III - Resilient Cloud Solutions/CloudFront.md",
+    "Domain III - Resilient Cloud Solutions/Route 53.md",
+    "Domain III - Resilient Cloud Solutions/Aurora.md",
+    "Domain VI - Security and Compliance/Trusted Advisor.md",
+    "Domain VI - Security and Compliance/Secrets Manager.md",
+    "Domain VI - Security and Compliance/Organizations.md",
+    "Domain VI - Security and Compliance/KMS.md",
+    "Domain VI - Security and Compliance/Inspector.md",
+    "Domain VI - Security and Compliance/IAM.md",
+    "Domain VI - Security and Compliance/GuardDuty.md",
+    "Domain VI - Security and Compliance/Config.md",
+    "Domain VI - Security and Compliance/Cognito.md",
+    "Domain V - Incident Response/X-Ray.md",
+    "Domain V - Incident Response/SQS.md",
+    "Domain V - Incident Response/SNS.md",
+    "Domain V - Incident Response/EventBridge.md",
+    "Domain IV - Monitoring and Logging/QuickSight.md",
+    "Domain IV - Monitoring and Logging/CloudWatch.md",
+    "Domain IV - Monitoring and Logging/CloudTrail.md",
+    "Domain IV - Monitoring and Logging/Athena.md",
+    "Domain III - Resilient Cloud Solutions/Storage Gateway.md",
+    "Domain III - Resilient Cloud Solutions/S3.md"
   ]
 }

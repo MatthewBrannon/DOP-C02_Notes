@@ -1,4 +1,4 @@
-## Amazon EC2 Cheat Sheet
+## Amazon EC2
 
 - A Linux-based/Windows-based/Mac-based virtual server that you can provision.
 - You are limited to running On-Demand Instances per your vCPU-based On-Demand Instance limit, purchasing 20 Reserved Instances, and requesting Spot Instances per your dynamic Spot limit per region.
@@ -14,7 +14,6 @@
     - r-type, x-type, and z-type for memory-optimized
     - d-type, h-type, and i-type for storage optimized
     - f-type, g-type, and p-type for accelerated computing
-
 - Secure login information for your instances using **key pairs**
 - Storage volumes for temporary data that are deleted when you STOP or TERMINATE your instance, known as **instance store volumes.** Take note that you can stop an EBS-backed instance but not an Instance Store-backed instance. You can only either start or terminate an Instance Store-backed instance.
 - Persistent storage volumes for your data using **Elastic Block Store volumes** (see AWS storage services).
@@ -26,7 +25,7 @@
 - Add a script that will be run on instance boot called **user-data**.
 - **Host Recovery for Amazon EC2** automatically restarts your instances on a new host in the event of an unexpected hardware failure on a Dedicated Host.
 - **EC2 Hibernation** is available for On-Demand and Reserved Instances running on freshly launched M3, M4, M5, C3, C4, C5, R3, R4, and R5 instances running Amazon Linux and Ubuntu 18.04 LTS. You can enable hibernation for your EBS-backed instances at launch. You can then hibernate and resume your instances through the AWS Management Console, or through the AWS SDK and CLI using the existing stop-instances and start-instances commands. Hibernation requires an EC2 instance to be an encrypted EBS-backed instance.
-- You can allow automatic connection of one or more EC2 instances to an [RDS](https://tutorialsdojo.com/amazon-relational-database-service-amazon-rds/) database.
+- You can allow automatic connection of one or more EC2 instances to an [[RDS]] database.
 
 ## **Instance states**
 
@@ -36,7 +35,6 @@
 - **Terminate** – instance performs a normal shutdown and gets deleted. You won’t be able to restart an instance once you terminate it. The root device volume is deleted by default, but any attached EBS volumes are preserved by default. Data in instance store volumes are deleted.
 - To prevent accidental termination, enable termination protection.
 - By enabling instance stop protection, you can prevent an instance from being accidentally stopped.
-
 ## **Root Device Volumes**
 
 - The root device volume contains the image used to boot the instance.
@@ -51,17 +49,16 @@
     - An Amazon EBS-backed instance can be stopped and later restarted without affecting data stored in the attached volumes.
     - When in a stopped state, you can modify the properties of the instance, change its size, or update the kernel it is using, or you can attach your root volume to a different running instance for debugging or any other purpose.
     - By default, the root device volume for an AMI backed by Amazon EBS is deleted when the instance terminates.
-    - Previously, to launch an encrypted EBS-backed EC2 instance from an unencrypted AMI, you would first need to create an encrypted copy of the AMI and use that to launch the EC2 instance. Now, you can **[launch encrypted EBS-backed EC2 instances](https://aws.amazon.com/about-aws/whats-new/2019/05/launch-encrypted-ebs-backed-ec2-instances-from-unencrypted-amis-in-a-single-step/)** from unencrypted AMIs directly.
+    - Previously, to launch an encrypted EBS-backed EC2 instance from an unencrypted AMI, you would first need to create an encrypted copy of the AMI and use that to launch the EC2 instance. Now, you can **launch encrypted EBS-backed EC2 instances** from unencrypted AMIs directly.
 
 ## **Amazon** **EC2 –** **AMI**
 
 - Includes the following:
     - A template for the root volume for the instance (OS, application server, and applications)
     - Launch permissions that control which AWS accounts can use the AMI to launch instances
-    - A block device mapping that specifies the volumes to attach to the instance when it’s launched
- ![AWS Training Amazon EC2 2](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-Amazon-EC2-2.jpg)
-- Backed by Amazon EBS – root device for an instance launched from the AMI is an Amazon EBS volume. AMIs backed by Amazon EBS snapshots can use EBS encryption.
-- Backed by Instance Store – root device for an instance launched from the AMI is an instance store volume created from a template stored in [S3](https://tutorialsdojo.com/amazon-s3/).
+    - A block device mapping that specifies the volumes to attach to the instance when it’s launched![AWS Training Amazon EC2 2](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-Amazon-EC2-2.jpg)
+ - Backed by Amazon EBS – root device for an instance launched from the AMI is an Amazon EBS volume. AMIs backed by Amazon EBS snapshots can use EBS encryption.
+- Backed by Instance Store – root device for an instance launched from the AMI is an instance store volume created from a template stored in [[S3]].
 
 |                                  |                                                                                                                                                      |                                                                                   |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -71,7 +68,7 @@
 | **Root device volume**           | EBS volume                                                                                                                                           | Instance store volume                                                             |
 | **Data persistence**             | By default, the root volume is deleted when the instances terminates.* Data on any other EBS volumes persists after instance termination by default. | Data on any instance store volumes persists only during the life of the instance. |
 | **Modifications**                | The instance type, kernel, RAM disk and user data can be changed while the instances is stopped.                                                     | Instance attributes are fixed for the life of an instance.                        |
-| **Charges**                      | You’re charged for instance usage, EBS volume usage, and storing your AMI as an EBS snapshot.                                                        | You’re charged for instance usage and storing your AMI in Amazon S3.              |
+| **Charges**                      | You’re charged for instance usage, EBS volume usage, and storing your AMI as an EBS snapshot.                                                        | You’re charged for instance usage and storing your AMI in Amazon [[S3]].          |
 | **AMI creation/bundling**        | Uses a single command/call.                                                                                                                          | Requires installation and use of AMI tools.                                       |
 | **Stopped state**                | Can be in a stopped state. Even when the instance is stopped and not running, the root volumes persisted in Amazon EBS.                              | Cannot be in stopped state; instances are running or terminated.                  |
 
@@ -82,7 +79,7 @@
 - Check the _LastLaunchedTime_ timestamp to see when your AMI was last used to launch an instance.
 - By default, a public AMI is deprecated after 2-years from the creation date.
     - In the EC2 console, public AMIs owned by Amazon or a verified Amazon partner is marked as a verified provider.
-- When an AMI changes state, an event is automatically generated, and you can use Amazon EventBridge to detect and respond to these events.
+- When an AMI changes state, an event is automatically generated, and you can use Amazon [[EventBridge]] to detect and respond to these events.
 - With UEFI Secure Boot, you can ensure that an instance only boots software signed with cryptographic keys.
 - You can configure an AMI to use Instance Metadata Service Version 2 (IMDSv2) when requesting instance metadata.
 - If an AMI has been shared with your AWS account, you can remove your account from the AMI’s launch permissions.
@@ -101,19 +98,17 @@
     - The Standard class provides the most significant discount but you can only modify some of its attributes during the term. It can also be sold in the Reserved Instance Marketplace.
     - The Convertible class provides a lower discount than Standard Reserved Instances, but can be exchanged for another Convertible Reserved Instance with different instance attributes. However, this one cannot be sold in the Reserved Instance Marketplace.
 
-|                                                                         |                                   |                                   |
-| ----------------------------------------------------------------------- | --------------------------------- | --------------------------------- |
 |                                                                         | **Standard RI**                   | **Convertible RI**                |
+| ----------------------------------------------------------------------- | --------------------------------- | --------------------------------- |
 | **Terms**<br><br>(average discount off On-Demand)                       | 1 year (40%)<br><br>3 years (60%) | 1 year (31%)<br><br>3 years (54%) |
 | Change Availability Zone, Instance size (for Linux OS), Networking type | Yes                               | Yes                               |
 | Change instance families, operating system, tenancy, and payment option |                                   | Yes                               |
 | Benefit from Price Reductions                                           |                                   | Yes                               |
 
-- - When purchasing a Reserved Instance, you’ll need to determine its scope (regional or zonal).
+-  When purchasing a Reserved Instance, you’ll need to determine its scope (regional or zonal).
 
-|                               |                                                                                                |                                                                                       |
-| ----------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 |                               | **Regional RI**                                                                                | **Zonal RI**                                                                          |
+| ----------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | Ability to Reserve Capacity   | No                                                                                             | Yes                                                                                   |
 | Availability Zone Flexibility | The discount is valid for instance usage in any Availability Zone within the specified Region. | The discount only applies to instance usage in the specified Availability Zone.       |
 | Instance Size Flexibility     | The discount applies to instance usage within the instance family.                             | The discount only applies to instance usage for the specified instance type and size. |
@@ -131,9 +126,8 @@
         - **CapacityOptimized** – The Spot Instances come from the pool with optimal capacity for the number of instances that are launching.
         - **InstancePoolsToUseCount** – The Spot Instances are distributed across the number of Spot pools that you specify. This parameter is valid only when used in combination with the lowest Price.
 
-|                              |                                                                                                                                                                                                                                                                      |                                                                                                            |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 |                              | **Spot Instances**                                                                                                                                                                                                                                                   | **On-Demand Instances**                                                                                    |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **Launch time**              | Can only be launched immediately if the Spot Request is active and capacity is available.                                                                                                                                                                            | Can only be launched immediately if you make a manual launch request and capacity is available.            |
 | **Available capacity**       | If capacity is not available, the Spot Request continues to automatically make the launch request until capacity becomes available.                                                                                                                                  | If Capacity is not available when you make a launch request, you get an Insufficient Capacity Error (ICE). |
 | **Hourly price**             | The hourly price for Spot Instances varies based on demand.                                                                                                                                                                                                          | The hourly price for On-Demand instance is static                                                          |
@@ -151,7 +145,7 @@
     - Your Savings Plans and regional Reserved Instances can be applied with your capacity reservations to receive discounts. Without these, your capacity reservations do not have billing discounts.
     - Capacity Reservations can be created in placement groups
     - Capacity Reservations can’t be used with Dedicated Hosts
-    - Your capacity reservation usage metrics can be monitored in Amazon Cloudwatch.
+    - Your capacity reservation usage metrics can be monitored in Amazon [[Cloudwatch]].
 - There is a data transfer charge when copying AMI from one region to another
 - EBS pricing is different from instance pricing. (see AWS storage services)
 - AWS imposes a small hourly charge if an Elastic IP address is not associated with a running instance, or if it is associated with a stopped instance or an unattached network interface.
@@ -161,8 +155,8 @@
 ## **Amazon** **Elastic Compute Cloud** **Security**
 
 - Use [[IAM]] to control access to your instances (see AWS Security and Identity Service).
-    - IAM policies
-    - IAM roles
+    - [[IAM]] policies
+    - [[IAM]] roles
 - Restrict access by only allowing trusted hosts or networks to access ports on your instance.
 - A **security group** acts as a virtual firewall that controls the traffic for one or more instances.
     - Create different security groups to deal with instances that have different security requirements.
@@ -177,7 +171,7 @@
     - Allows all inbound traffic from other instances associated with the default security group
     - Allows all outbound traffic from the instance.
 - Disable password-based logins for instances launched from your AMI, since passwords can be cracked or found.
-- You can replicate the network traffic from an [[EC2]] instance within your Amazon VPC and forward that traffic to security and monitoring appliances for content inspection, threat monitoring, and troubleshooting.
+- You can replicate the network traffic from an EC2 instance within your Amazon VPC and forward that traffic to security and monitoring appliances for content inspection, threat monitoring, and troubleshooting.
 - When creating a new key pair, you can specify the key format (.pem & .ppk).
 - Querying of the public key and creation date of an EC2 key pair is supported.
 - For EC2 Instance Connect and EC2 Serial Console, ED25519 keys are now supported.
@@ -204,13 +198,13 @@
 
 - EC2 items to monitor
     - CPU utilization, Network utilization, Disk performance, Disk Reads/Writes using EC2 metrics
-    - Memory utilization, disk swap utilization, disk space utilization, page file utilization, log collection using a monitoring agent/CloudWatch Logs
+    - Memory utilization, disk swap utilization, disk space utilization, page file utilization, log collection using a monitoring agent/[[CloudWatch]] Logs
 - Automated monitoring tools include:
     - System Status Checks – monitor the AWS systems required to use your instance to ensure they are working properly. These checks detect problems with your instance that require AWS involvement to repair.
     - Instance Status Checks – monitor the software and network configuration of your individual instance. These checks detect problems that require your involvement to repair.
     - Amazon [[CloudWatch]] Alarms – watch a single metric over a time period you specify, and perform one or more actions based on the value of the metric relative to a given threshold over a number of time periods.
     - Amazon [[CloudWatch]] Events – automate your AWS services and respond automatically to system events.
-    - Amazon CloudWatch Logs – monitor, store, and access your log files from Amazon EC2 instances, AWS [[CloudTrail]], or other sources.
+    - Amazon [[CloudWatch]] Logs – monitor, store, and access your log files from Amazon EC2 instances, AWS [[CloudTrail]], or other sources.
 - Monitor your EC2 instances with [[CloudWatch]]. By default, EC2 sends metric data to [[CloudWatch]] in 5-minute periods.
 - You can also enable detailed monitoring to collect data in 1-minute periods.
 
@@ -248,13 +242,13 @@
 - **EBS** (see AWS Storage Services)
     - Provides durable, block-level storage volumes that you can attach to a running instance.
     - Use as a primary storage device for data that requires frequent and granular updates.
-    - To keep a backup copy of your data, create a snapshot of an EBS volume, which is stored in S3. You can create an EBS volume from a snapshot, and attach it to another instance.
+    - To keep a backup copy of your data, create a snapshot of an EBS volume, which is stored in [[S3]]. You can create an EBS volume from a snapshot, and attach it to another instance.
 - **Instance Store**
     - Provides temporary block-level storage for instances.
     - The data on an instance store volume persists only during the life of the associated instance; if you stop or terminate an instance, any data on instance store volumes is lost.
-- **EFS** (see AWS Storage Services)
-    - Provides scalable file storage for use with Amazon EC2. You can create an EFS file system and configure your instances to mount the file system.
-    - You can use an EFS file system as a common data source for workloads and applications running on multiple instances.
+- **[[EFS]]** (see AWS Storage Services)
+    - Provides scalable file storage for use with Amazon EC2. You can create an [[EFS]] file system and configure your instances to mount the file system.
+    - You can use an [[EFS]] file system as a common data source for workloads and applications running on multiple instances.
 - **FSx** 
     - [Amazon FSx](https://tutorialsdojo.com/amazon-fsx/) for Windows File Server is a fully-managed file storage built on Windows Server.
     - Amazon FSx for Lustre is a fully-managed file storage built on the world’s most popular high-performance file system, Lustre.
@@ -268,18 +262,17 @@
     - EC2 resources include images, instances, volumes, and snapshots. When you create a resource, AWS assigns the resource a _unique resource ID_.
     - Some resources can be used in all regions (global), and some resources are specific to the region or Availability Zone in which they reside.  
 
-|   |   |   |
-|---|---|---|
-|**Resource**|**Type**|**Description**|
-|AWS account|Global|You can use the same AWS account in all regions.|
-|Key pairs|Global or Regional|The key pairs that you create using EC2 are tied to the region where you created them. You can create your own RSA key pair and upload it to the region in which you want to use it; therefore, you can make your key pair globally available by uploading it to each region.|
-|Amazon EC2 resource identifiers|Regional|Each resource identifier, such as an AMI ID, instance ID, EBS volume ID, or EBS snapshot ID, is tied to its region and can be used only in the region where you created the resource.|
-|User-supplied resource names|Regional|Each resource name, such as a security group name or key pair name, is tied to its region and can be used only in the region where you created the resource. Although you can create resources with the same name in multiple regions, they aren’t related to each other.|
-|AMIs|Regional|An AMI is tied to the region where its files are located within S3. You can copy an AMI from one region to another.|
-|Elastic IP addresses|Regional|An Elastic IP address is tied to a region and can be associated only with an instance in the same region.|
-|Security groups|Regional|A security group is tied to a region and can be assigned only to instances in the same region. You can’t enable an instance to communicate with an instance outside its region using security group rules.|
-|EBS snapshots|Regional|An EBS snapshot is tied to its region and can only be used to create volumes in the same region. You can copy a snapshot from one region to another.|
-|EBS volumes|Availability Zone|An EBS volume is tied to its Availability Zone and can be attached only to instances in the same Availability Zone.|
-|Instances|Availability Zone|An instance is tied to the Availability Zones in which you launched it. However, its instance ID is tied to the region.|
+| **Resource**                    | **Type**           | **Description**                                                                                                                                                                                                                                                               |
+| ------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AWS account                     | Global             | You can use the same AWS account in all regions.                                                                                                                                                                                                                              |
+| Key pairs                       | Global or Regional | The key pairs that you create using EC2 are tied to the region where you created them. You can create your own RSA key pair and upload it to the region in which you want to use it; therefore, you can make your key pair globally available by uploading it to each region. |
+| Amazon EC2 resource identifiers | Regional           | Each resource identifier, such as an AMI ID, instance ID, EBS volume ID, or EBS snapshot ID, is tied to its region and can be used only in the region where you created the resource.                                                                                         |
+| User-supplied resource names    | Regional           | Each resource name, such as a security group name or key pair name, is tied to its region and can be used only in the region where you created the resource. Although you can create resources with the same name in multiple regions, they aren’t related to each other.     |
+| AMIs                            | Regional           | An AMI is tied to the region where its files are located within [[S3]]. You can copy an AMI from one region to another.                                                                                                                                                           |
+| Elastic IP addresses            | Regional           | An Elastic IP address is tied to a region and can be associated only with an instance in the same region.                                                                                                                                                                     |
+| Security groups                 | Regional           | A security group is tied to a region and can be assigned only to instances in the same region. You can’t enable an instance to communicate with an instance outside its region using security group rules.                                                                    |
+| EBS snapshots                   | Regional           | An EBS snapshot is tied to its region and can only be used to create volumes in the same region. You can copy a snapshot from one region to another.                                                                                                                          |
+| EBS volumes                     | Availability Zone  | An EBS volume is tied to its Availability Zone and can be attached only to instances in the same Availability Zone.                                                                                                                                                           |
+| Instances                       | Availability Zone  | An instance is tied to the Availability Zones in which you launched it. However, its instance ID is tied to the region.                                                                                                                                                       |
 
-- - You can optionally assign your own metadata to each resource with **tags**, which consist of a key and an optional value that you both define.
+- You can optionally assign your own metadata to each resource with **tags**, which consist of a key and an optional value that you both define.

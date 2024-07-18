@@ -1,12 +1,12 @@
-## **AWS X-Ray Cheat Sheet**
+## **AWS X-Ray
 
 - AWS X-Ray analyzes and debugs production, distributed applications, such as those built using a microservices architecture. With X-Ray, you can identify performance bottlenecks, edge case errors, and other hard to detect issues.
 
 ## **Concepts**
 
-- - A **segment** provides the name of the compute resources running your application logic, details about the request sent by your application, and details about the work done.
+- A **segment** provides the name of the compute resources running your application logic, details about the request sent by your application, and details about the work done.
     - A segment can break down the data about the work done into **subsegments**. A subsegment can contain additional details about a call to an AWS service, an external HTTP API, or an SQL database.
-        - For services that don’t send their own segments, like Amazon DynamoDB, X-Ray uses subsegments to generate _inferred segments_ and _downstream nodes_ on the service map. This lets you see all of your downstream dependencies, even if they don’t support tracing, or are external.
+        - For services that don’t send their own segments, like Amazon [[DynamoDB]], X-Ray uses subsegments to generate _inferred segments_ and _downstream nodes_ on the service map. This lets you see all of your downstream dependencies, even if they don’t support tracing, or are external.
         - Subsegments represent your application’s view of a downstream call as a client. If the downstream service is also instrumented (like an AWS SDK client), the segment that it sends replaces the inferred segment generated from the upstream client’s subsegment.
     - X-Ray uses the data that your application sends to generate a **service graph**. Each AWS resource that sends data to X-Ray appears as a service in the graph.
     - A **service graph** is a JSON document that contains information about the services and resources that make up your application. The X-Ray console uses the service graph to generate a visualization or _service map_. Service graph data is retained for 30 days.
@@ -25,21 +25,17 @@
 
 ## **Features**
 
-- - AWS X-Ray can be used with applications running on Amazon EC2, Amazon ECS, AWS Lambda, AWS [[Elastic Beanstalk]]. You just integrate the X-Ray SDK with your application and install the X-Ray agent.
+- AWS X-Ray can be used with applications running on Amazon [[EC2]], Amazon [[ECS]], AWS [[Lambda]], AWS [[Elastic Beanstalk]]. You just integrate the X-Ray SDK with your application and install the X-Ray agent.
     - AWS X-Ray provides an end-to-end, cross-service, application-centric view of requests flowing through your application by aggregating the data gathered from individual services in your application into a single unit called a _trace_.
-    - The X-Ray SDK captures metadata for requests made to MySQL and PostgreSQL databases (self-hosted, Amazon RDS, Amazon Aurora), and Amazon DynamoDB. It also captures metadata for requests made to Amazon SQS and Amazon SNS.
+    - The X-Ray SDK captures metadata for requests made to MySQL and PostgreSQL databases (self-hosted, Amazon [[RDS]], Amazon [[Aurora]]), and Amazon [[DynamoDB]]. It also captures metadata for requests made to Amazon [[SQS]] and Amazon [[SNS]].
     - You can set the **trace sampling rate** that is best suited for your production applications or applications in development. X-Ray continually traces requests made to your application and stores a sampling of the requests for your analysis.
     - AWS X-Ray creates a map of services used by your application with trace data. This provides a view of connections between services in your application and aggregated data for each service, including average latency and failure rates. You can create dependency trees, perform cross-availability zone or region call detections, and more.
     - AWS X-Ray lets you add annotations to data emitted from specific components or services in your application.
 
-[![Tutorials dojo strip](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2024/07/TD_Mid-Year-Sale-strip-ad-extension_4July2024-scaled.webp)](https://portal.tutorialsdojo.com/shop/)
-
 ## **How X-Ray Works**
 
-- - AWS X-Ray receives data from services as _segments_. X-Ray then groups segments that have a common request into _traces_. X-Ray processes the traces to generate a _service graph_ that provides a visual representation of your application.
-
-![AWS X-Ray Cheat Sheet](https://media.tutorialsdojo.com/public/TD_AWS_XRAY_CheatSheet.png)
-
+- AWS X-Ray receives data from services as _segments_. X-Ray then groups segments that have a common request into _traces_. X-Ray processes the traces to generate a _service graph_ that provides a visual representation of your application.
+	- ![AWS X-Ray Cheat Sheet](https://media.tutorialsdojo.com/public/TD_AWS_XRAY_CheatSheet.png)
 - X-Ray SDK
     - The X-Ray SDK provides:
         - **Interceptors** to add to your code to trace incoming HTTP requests
@@ -58,13 +54,13 @@
         - Request tracing – Adds a tracing header to all incoming requests and propagates it downstream.
         - Tooling – Runs the X-Ray daemon to receive segments from the X-Ray SDK.
     - The following services provide X-Ray integration:
-        - AWS Lambda – Active and passive instrumentation of incoming requests on all runtimes. AWS Lambda adds two nodes to your service map, one for the AWS Lambda service, and one for the function.
-        - Amazon API Gateway – Active and passive instrumentation. API Gateway uses sampling rules to determine which requests to record, and adds a node for the gateway stage to your service map.
+        - AWS [[Lambda]] – Active and passive instrumentation of incoming requests on all runtimes. AWS [[Lambda]] adds two nodes to your service map, one for the AWS [[Lambda]] service, and one for the function.
+        - Amazon [[API Gateway]] – Active and passive instrumentation. [[API Gateway]] uses sampling rules to determine which requests to record, and adds a node for the gateway stage to your service map.
         - Elastic Load Balancing – Request tracing on application load balancers. The application load balancer adds the trace ID to the request header before sending it to a target group.
         - AWS [[Elastic Beanstalk]] – Tooling.
 
 ## **AWS X-Ray** **Pricing**
 
-- - You pay based on the number of traces recorded, retrieved, and scanned. A trace represents a request to your application and may include multiple data points, such as for calls to other services and database access.
+- You pay based on the number of traces recorded, retrieved, and scanned. A trace represents a request to your application and may include multiple data points, such as for calls to other services and database access.
     - The maximum size of a trace is 500 KB.
     - Trace data is retained for 30 days from the time it is recorded at no additional cost.

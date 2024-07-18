@@ -1,7 +1,7 @@
 # DevOps Professional Study Workbook
 
 ## Topics:
-### 1. [Domain 1 - SDLC](Domain%201%20-%20SDLC.md)
+### 1. [[Domain I - SDLC]]
   - #### [Deployment Types](Domain%201%20-%20SDLC.md#Deployment-Types)
   - #### [CodeCommit](Domain%201%20-%20SDLC.md#CodeCommit)
   - #### [CodeBuild](Domain%201%20-%20SDLC.md#CodeBuild)
@@ -14,18 +14,18 @@
   - #### [Lambda Step Functions](Domain%202%20-%20ConfigInfrastructure.md#Lambda-Step-Functions)
   - #### [OpsWorks](Domain%202%20-%20ConfigInfrastructure.md#OpsWorks)
 
-### 3. [Monitoring and Logging](MonitoringLogging.md)
-  - #### [CloudWatch](MonitoringLogging.md#CloudWatch)
-  - #### [X-Ray](MonitoringLogging.md#X-Ray)
+### 3. [Monitoring and Logging](Monitoring%20Logging.md)
+  - #### [CloudWatch](Monitoring%20Logging.md#CloudWatch)
+  - #### [X-Ray](Monitoring%20Logging.md#X-Ray)
 
-### 4. [Policies and Standards Automation](Policies.md)
-  - #### [Service Catalog](Policies.md#Service-Catalog)
-  - #### [Trusted Advisor](Policies.md#Trusted-Advisor)
-  - #### [Systems Manager](Policies.md#Systems-Manager)
-  - #### [Organizations](Policies.md#Organizations)
-  - #### [Secrets Manager](Policies.md#Secrets-Manager)
-  - #### [Macie](Policies.md#Macie)
-  - #### [Certificate Manager](Policies.md#Certificate-Manager)
+### 4. [Policies and Standards Automation](Policy.md)
+  - #### [Service Catalog](Policy.md#Service-Catalog)
+  - #### [Trusted Advisor](Policy.md#Trusted-Advisor)
+  - #### [Systems Manager](Policy.md#Systems-Manager)
+  - #### [Organizations](Policy.md#Organizations)
+  - #### [Secrets Manager](Policy.md#Secrets-Manager)
+  - #### [Macie](Policy.md#Macie)
+  - #### [Certificate Manager](Policy.md#Certificate-Manager)
 
 ### 5. [Incident and Event Response](Incident.md)
   - #### [GuardDuty](Incident.md#GuardDuty)

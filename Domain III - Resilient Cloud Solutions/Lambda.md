@@ -1,4 +1,4 @@
-## AWS Lambda Cheat Sheet
+## AWS Lambda
 
 - A serverless compute service.
 - Lambda executes your code only when needed and scales automatically.
@@ -24,14 +24,14 @@
 - **Layers** – Lambda layers are a distribution mechanism for libraries, custom runtimes, and other function dependencies. Layers let you manage your in-development function code independently from the unchanging code and resources that it uses.
 - **Event source** – an AWS service or a custom service that triggers your function and executes its logic.
 - **Downstream resources** – an AWS service that your Lambda function calls once it is triggered.
-- **Log streams** – While Lambda automatically monitors your function invocations and reports metrics to CloudWatch, you can annotate your function code with custom logging statements that allow you to analyze the execution flow and performance of your Lambda function.
+- **Log streams** – While Lambda automatically monitors your function invocations and reports metrics to [[CloudWatch]], you can annotate your function code with custom logging statements that allow you to analyze the execution flow and performance of your Lambda function.
 - AWS Serverless Application Model
 
 ## **Lambda Functions**
 
-- You can upload your application code as a ZIP file or a container image hosted on [Amazon Elastic Container Registry (Amazon ECR)](https://tutorialsdojo.com/amazon-elastic-container-registry-amazon-ecr/).
+- You can upload your application code as a ZIP file or a container image hosted on Amazon [[ECR]].
 - To create a Lambda function, you first package your code and dependencies in a deployment package. Then, you upload the deployment package to create your Lambda function.
-- After your Lambda function is in production, Lambda automatically monitors functions on your behalf, reporting metrics through [Amazon CloudWatch](https://tutorialsdojo.com/amazon-cloudwatch/).
+- After your Lambda function is in production, Lambda automatically monitors functions on your behalf, reporting metrics through Amazon [[CloudWatch]].
 - Conﬁgure **basic function** **settings,** including the description, memory usage, storage (**512MB – 10GB**), execution timeout (**15 minutes max**), and the role that the function will use to execute your code.
 - **Environment variables** are always encrypted at rest and can be encrypted in transit as well.
 - **Versions** – a snapshot of your function’s state at a given time. When you publish a new version, a **:version-number** is appended to your function’s ARN:
@@ -39,7 +39,7 @@
 - **Aliases** – serves as a pointer to a Lambda function version. Aliases create a human-readable version of the function’s name, making it easier to remember and understand what the function does. An alias follows the following format:
     - **arn:aws:lambda:us-east-2:123456789123:function:my-function:MyAlias**
 - A **layer** is a ZIP archive that contains libraries, a custom runtime, or other dependencies. Use layers to manage your function’s dependencies independently and keep your deployment package small.
-- You can configure a function to mount an Amazon EFS file system to a local directory. With [Amazon EFS](https://tutorialsdojo.com/amazon-efs/), your function code can access and modify shared resources securely and at high concurrency.
+- You can configure a function to mount an Amazon [[EFS]] file system to a local directory. With Amazon [[EFS]], your function code can access and modify shared resources securely and at high concurrency.
 
 ## **Invoking Lambda Functions**
 
@@ -47,23 +47,23 @@
 - Synchronous invocation
     - when a function is invoked synchronously, AWS Lambda waits until the function is done processing, then returns the result.
     - examples of AWS services that invoke Lambda functions synchronously:
-        - [Amazon API Gateway](https://tutorialsdojo.com/amazon-api-gateway/) Application Load Balancer
-        - [Amazon [[Cognito]]](https://tutorialsdojo.com/amazon-[[cognito]]/) 
-        - [Amazon Kinesis](https://tutorialsdojo.com/amazon-kinesis/) Data Firehose
-        - [Amazon CloudFront](https://tutorialsdojo.com/amazon-cloudfront/) (Lambda@Edge)
+        - Amazon [[API Gateway]] Application Load Balancer
+        - Amazon [[Cognito]]
+        - Amazon [[Kinesis]] Data Firehose
+        - Amazon [[CloudFront]](Lambda@Edge)
 - Asynchronous invocation
     - when a function is invoked asynchronously, AWS Lambda stores the event in an internal queue and handles the invocation
     - the Lambda function returns a _202 status code (Accepted)_ immediately after being invoked, and the processing continues in the background. The 202 code just confirms that the event is queued; it does not indicate whether the function runs successfully or not.
     - typically used for long-latency processes that run in the background, such as batch operations, video encoding, and order processing.
     - can only accept a payload of up to 256 KB.
     - examples of AWS services that invoke Lambda functions asynchronously:
-        - Amazon API Gateway (by specifying **Event** in the **X-Amz-Invocation-Type** request header of a non-proxy integration)
-        - [Amazon S3](https://tutorialsdojo.com/amazon-s3/)
-        - Amazon CloudWatch Logs
-        - [Amazon EventBridge](https://portal.tutorialsdojo.com/product/amazon-event-bridge-overview/)
-        - [AWS CodeCommit](https://tutorialsdojo.com/aws-codecommit/)
-        - [AWS CloudFormation](https://tutorialsdojo.com/aws-cloudformation/)
-        - [AWS Config](https://tutorialsdojo.com/aws-config/)
+        - Amazon [[API Gateway]] (by specifying **Event** in the **X-Amz-Invocation-Type** request header of a non-proxy integration)
+        - Amazon [[S3]]
+        - Amazon [[CloudWatch]] Logs
+        - Amazon [[EventBridge]]
+        - AWS [[CodeCommit]]
+        - AWS [[CloudFormation]]
+        - AWS [[Config]]
 
 ## **Event Source Mapping**
 
@@ -74,9 +74,9 @@
     - The maximum batching window is reached
     - The total payload is 6 MB
 - Lambda provides event source mappings for the following services.
-    - [Amazon Kinesis](https://tutorialsdojo.com/amazon-kinesis/)
-    - [Amazon DynamoDB](https://tutorialsdojo.com/amazon-dynamodb/)
-    - [Amazon Simple Queue Service](https://tutorialsdojo.com/amazon-sqs/)
+    - Amazon [[Kinesis]]
+    - Amazon [[DynamoDB]]
+    - Amazon [[SQS]]
     - [Amazon MQ](https://tutorialsdojo.com/amazon-mq/)
     - [Amazon Managed Streaming for Apache Kafka (Amazon MSK)](https://tutorialsdojo.com/amazon-managed-streaming-for-apache-kafka-amazon-msk/)
     - Self-managed Apache Kafka
@@ -87,7 +87,7 @@
 - If you’re using an external library/SDK/module in your Lambda code, do the following steps:
     1. Place all external dependencies locally in your application’s folder.
     2. Create a ZIP deployment package of your Lambda function.
-    3. Upload the deployment package to AWS Lambda. You can send the file directly to the AWS Lambda Console or store it first in Amazon S3 and deploy it from there.
+    3. Upload the deployment package to AWS Lambda. You can send the file directly to the AWS Lambda Console or store it first in Amazon [[S3]] and deploy it from there.
 
 ## **Concurrency Management**
 
@@ -98,48 +98,39 @@
 ## **Lambda Function URL**
 
 - With the function URL feature of the AWS Lambda service, you can launch a secure HTTPS endpoint dedicated to your custom Lambda function.
-- You don’t need an intermediary service such as Amazon API Gateway to directly invoke your function, which was required in the past. Just send an HTTP request to the unique URL of your Lambda function to get started.
+- You don’t need an intermediary service such as Amazon [[API Gateway]] to directly invoke your function, which was required in the past. Just send an HTTP request to the unique URL of your Lambda function to get started.
 - Function URL endpoints are publicly accessible by default and have the following format:
-    - **https://****<url-id>****.lambda-url.****<region>****.on.aws**
+    - `https://<url-id>.lambda-url.<region>.on.aws
 - A Lambda Function URL can be created and configured via the AWS Lambda console or through the Lambda API.
 - Upon creating a function URL, AWS Lambda automatically generates a unique URL endpoint for you that you can immediately use.
 - This URL endpoint is static and doesn’t change once created.
 - Lambda URLs are dual stack-enabled, which support both IPv4 and IPv6 protocols
 - The URL can be invoked via a web browser, CURL, Postman, or any HTTP client.
 - There are 2 authentication types for controlling access to a Lambda function URL:
-    - **AWS_[IAM](https://tutorialsdojo.com/aws-identity-and-access-management-iam/)** – uses IAM to authenticate and authorize users. Only IAM users or roles that have been granted permission to invoke the function through IAM policies will be able to do so.
+    - **AWS_[[IAM]]** – uses [[IAM]] to authenticate and authorize users. Only [[IAM]] users or roles that have been granted permission to invoke the function through [[IAM]] policies will be able to do so.
     - **NONE** – allows anyone who has the function URL to execute the Lambda function whether they have an AWS account or not.
 - You can access your function URL through the public Internet only and not via AWS PrivateLink (e.g., VPC Endpoints)
 - Uses resource-based policies for security and access control. You can further secure your function URL by enabling cross-origin resource sharing (CORS) to whitelist origins permitted to invoke it.
 - A function URL can be applied to any Lambda function alias or to the **LATEST** unpublished function version but not to any other function version.
 
 ## Configuring a Lambda Function to Access Resources in a VPC
-
 In AWS Lambda, you can set up your function to establish a connection to your virtual private cloud (VPC). With this connection, your function can access the private resources of your VPC during execution like [[EC2]], [[RDS]] and many others.
 
 By default, AWS executes your Lambda function code securely within a VPC. Alternatively, you can enable your Lambda function to access resources inside your private VPC by providing additional VPC-specific configuration information such as VPC subnet IDs and security group IDs. It uses this information to set up elastic network interfaces which enable your Lambda function to connect securely to other resources within your VPC.
 
-![](data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E)
-
 ## **Lambda@Edge**
-
-- Lets you run Lambda functions to customize content that CloudFront delivers, executing the functions in AWS locations closer to the viewer. The functions run in response to CloudFront events, without provisioning or managing servers.
-- You can use Lambda functions to change CloudFront requests and responses at the following points:
-    - After CloudFront receives a request from a viewer (viewer request)
-    - Before CloudFront forwards the request to the origin (origin request)
-    - After CloudFront receives the response from the origin (origin response)
-    - Before CloudFront forwards the response to the viewer (viewer response)
-
-## ![AWS Training Lambda](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Lambda.jpg)
-
-- You can automate your serverless application’s release process using [AWS CodePipeline](https://tutorialsdojo.com/aws-codepipeline/) and [AWS CodeDeploy](https://tutorialsdojo.com/aws-codedeploy/).
+- Lets you run Lambda functions to customize content that [[CloudFront]] delivers, executing the functions in AWS locations closer to the viewer. The functions run in response to [[CloudFront]] events, without provisioning or managing servers.
+- You can use Lambda functions to change [[CloudFront]] requests and responses at the following points:
+    - After [[CloudFront]] receives a request from a viewer (viewer request)
+    - Before [[CloudFront]] forwards the request to the origin (origin request)
+    - After [[CloudFront]] receives the response from the origin (origin response)
+    - Before [[CloudFront]] forwards the response to the viewer (viewer response)
+- You can automate your serverless application’s release process using AWS [[CodePipeline]].
 - Lambda will automatically track the behavior of your Lambda function invocations and provide feedback that you can monitor. In addition, it provides metrics that allow you to analyze the full function invocation spectrum, including event source integration and whether downstream resources perform as expected.
 
 ## AWS Lambda SnapStart
-
 - Lambda SnapStart speeds up your Java applications by reusing a single initialized snapshot to quickly resume multiple execution environments.
 - You can use the Lambda SnapStart for Java feature to decrease the cold start time required without provisioning additional resources. This also removes the burden of implementing complex performance optimizations for your Java application
 
 ## **AWS Lambda Pricing**
-
 - You are charged based on the total number of requests for your functions and the duration, the time it takes for your code to execute.

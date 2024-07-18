@@ -1,4 +1,4 @@
-## Amazon DynamoDB Cheat Sheet
+## Amazon DynamoDB
 
 - NoSQL database service that provides fast and predictable performance with seamless scalability.
 - Offers encryption at rest.
@@ -39,10 +39,9 @@
     - Each stream record also contains the name of the table, the event timestamp, and other metadata.
     - Stream records are organized into groups, or **_shards_**. Each shard acts as a container for multiple stream records, and contains information required for accessing and iterating through these records.
     - Stream records have a lifetime of 24 hours; after that, they are automatically removed from the stream.
-    - You can use DynamoDB Streams together with AWS Lambda to create a _trigger_, which is a code that executes automatically whenever an event of interest appears in a stream.
-    - DynamoDB Streams enables powerful solutions such as data replication within and across Regions, materialized views of data in DynamoDB tables, data analysis using Kinesis materialized views, and much more.
-
-![AWS Training Amazon DynamoDB 2](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-Amazon-DynamoDB-2.jpg)
+    - You can use DynamoDB Streams together with AWS [[Lambda]] to create a _trigger_, which is a code that executes automatically whenever an event of interest appears in a stream.
+    - DynamoDB Streams enables powerful solutions such as data replication within and across Regions, materialized views of data in DynamoDB tables, data analysis using [[Kinesis]] materialized views, and much more.
+    - ![AWS Training Amazon DynamoDB 2](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-Amazon-DynamoDB-2.jpg)
 
 ## **Data Types for Attributes**
 
@@ -79,21 +78,75 @@
     - Query – reads multiple items that have the same partition key value.
     - Scan – reads all of the items in a table
 - CUC for Writes
-    
     - PutItem – writes a single item to a table.
     - UpdateItem – modifies a single item in the table.
     - DeleteItem – removes a single item from a table.
     - BatchWriteItem – writes up to 25 items to one or more tables.
-    - Calculating the Required Read and Write Capacity Unit for Your DynamoDB table: [https://tutorialsdojo.com/calculating-the-required-read-and-write-capacity-unit-for-your-dynamodb-table/](https://tutorialsdojo.com/calculating-the-required-read-and-write-capacity-unit-for-your-dynamodb-table/)
+    - Calculating the Required Read and Write Capacity Unit for Your DynamoDB table: 
+### **Read Capacity Unit**
+#### On-Demand Mode
+
+When you choose on-demand mode, DynamoDB instantly accommodates your workloads as they ramp up or down to any previously reached traffic level. If a workload’s traffic level hits a new peak, DynamoDB adapts rapidly to accommodate the workload. The request rate is only limited by the DynamoDB throughput default table limits, but it can be raised upon request.
+
+For on-demand mode tables, you don’t need to specify how much read throughput you expect your application to perform. DynamoDB charges you for the reads that your application performs on your tables in terms of read request units.
+
+- 1 read request unit (RRU) = 1 strongly consistent read of up to 4 KB/s = 2 eventually consistent reads of up to 4 KB/s per read.
+- 2 RRUs = 1 transactional read request (one read per second) for items up to 4 KB.
+- For reads on items greater than 4 KB, total number of reads required = (total item size / 4 KB) rounded up.
+
+#### Provisioned Mode
+
+If you choose provisioned mode, you specify the number of reads and writes per second that you require for your application. You can use auto scaling to adjust your table’s provisioned capacity automatically in response to traffic changes. For provisioned mode tables, you specify throughput capacity in terms of read capacity units (RCUs).
+
+- 1 read capacity unit (RCU) =  1 strongly consistent read of up to 4 KB/s = 2 eventually consistent reads of up to 4 KB/s per read.
+- 2 RCUs = 1 transactional read request (one read per second) for items up to 4 KB.
+- For reads on items greater than 4 KB, total number of reads required = (total item size / 4 KB) rounded up.
+
+### **Write Capacity Unit**
+
+#### On-Demand Mode
+
+For on-demand mode tables, you don’t need to specify how much write throughput you expect your application to perform. DynamoDB charges you for the writes that your application performs on your tables in terms of write request units.
+
+- 1 write request unit (WRU) = 1 write of up to 1 KB/s.
+- 2 WRUs = 1 transactional write request (one write per second) for items up to 1 KB.
+- For writes greater than 1 KB, total number of writes required = (total item size / 1 KB) rounded up
+
+#### Provisioned Mode
+
+For provisioned mode tables, you specify throughput capacity in terms of write capacity units (WCUs).
+
+- 1 write capacity unit (WCU) = 1 write of up to 1 KB/s.
+- 2 WCUs = 1 transactional write request (one write per second) for items up to 1 KB.
+- For writes greater than 1 KB, total number of writes required = (total item size / 1 KB) rounded up
+
+### **Examples**
+
+1. For 5 KB average item size:
+    1. 1 read capacity unit needed to perform 1 eventually consistent read per second
+    2. 2 read capacity units needed to perform 1 strongly consistent read per second
+    3. 4 read capacity units needed to perform 1 transactional read per second
+    4. 5 write capacity units needed to perform 1 standard write per second
+    5. 10 write capacity units needed to perform 1 transactional write per second
+2. For 9 KB average item size:
+    1. 2 read capacity unit needed to perform 1 eventually consistent read per second
+    2. 3 read capacity units needed to perform 1 strongly consistent read per second
+    3. 6 read capacity units needed to perform 1 transactional read per second
+    4. 9 write capacity units needed to perform 1 standard write per second
+    5. 18 write capacity units needed to perform 1 transactional write per second
+3. For 13 KB average item size:
+    1. 2 read capacity unit needed to perform 1 eventually consistent read per second
+    2. 4 read capacity units needed to perform 1 strongly consistent read per second
+    3. 8 read capacity units needed to perform 1 transactional read per second
+    4. 13 write capacity units needed to perform 1 standard write per second
+    5. 26 write capacity units needed to perform 1 transactional write per second
 
 ## **DynamoDB Auto Scaling**
 
 - When you use the AWS Management Console to create a new table, DynamoDB auto scaling is enabled for that table by default.
 - Uses the AWS Application Auto Scaling service to dynamically adjust provisioned throughput capacity on your behalf, in response to actual traffic patterns.
 - You create a _scaling policy_ for a table or a global secondary index. The scaling policy specifies whether you want to scale read capacity or write capacity (or both), and the minimum and maximum provisioned capacity unit settings for the table or index. The scaling policy also contains a _target utilization_, which is the percentage of consumed provisioned throughput at a point in time.
-
-![AWS Training Amazon DynamoDB 3](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-Amazon-DynamoDB-3.jpg)
-
+- ![AWS Training Amazon DynamoDB 3](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-Amazon-DynamoDB-3.jpg)
 - DynamoDB auto scaling doesn’t prevent you from manually modifying provisioned throughput settings.
 - If you enable DynamoDB auto scaling for a table that has one or more global secondary indexes, AWS highly recommends that you also apply auto scaling uniformly to those indexes.
 
@@ -149,8 +202,8 @@
 
 ## **On-Demand Backup and Restore**
 
-- You can use IAM to restrict DynamoDB backup and restore actions for some resources.
-- All backup and restore actions are captured and recorded in AWS CloudTrail.
+- You can use [[IAM]] to restrict DynamoDB backup and restore actions for some resources.
+- All backup and restore actions are captured and recorded in AWS [[CloudTrail]].
 - Backups
     - Each time you create an on-demand backup, the entire table data is backed up.
     - All backups and restores in DynamoDB work without consuming any provisioned throughput on the table.
@@ -204,7 +257,7 @@
 ## **Amazon DynamoDB Security**
 
 - Encryption
-    - Encrypts your data at rest using an AWS Key Management Service (AWS KMS) managed encryption key for DynamoDB.
+    - Encrypts your data at rest using an AWS [[KMS]] managed encryption key for DynamoDB.
     - Encryption at rest can be enabled only when you are creating a new DynamoDB table.
     - After encryption at rest is enabled, it can’t be disabled.
     - Uses AES-256 encryption.
@@ -217,29 +270,29 @@
         - Aside from valid credentials, you also need to have permissions to create or access DynamoDB resources.
         - Types of Identities
             - **AWS account root user**
-            - **IAM user**
-            - **IAM role**
+            - **[[IAM]] user**
+            - **[[IAM]] role**
     - You can create indexes and streams only in the context of an existing DynamoDB table, referred to as _subresources_.
     - Resources and subresources have unique Amazon Resource Names (**ARNs**) associated with them.
     - A _permissions policy_ describes who has access to what.
         - Identity-based Policies
             - Attach a permissions policy to a user or a group in your account
             - Attach a permissions policy to a role (grant cross-account permissions)
-- - - Policy Elements
+- Policy Elements
             - Resource – use an ARN to identify the resource that the policy applies to.
             - Action – use action keywords to identify resource operations that you want to allow or deny.
             - Effect – specify the effect, either allow or deny, when the user requests the specific action.
             - Principal – the user that the policy is attached to is the implicit principal.
-- - Web Identity Federation – Customers can sign in to an identity provider and then obtain temporary security credentials from AWS Security Token Service (AWS STS).
+- Web Identity Federation – Customers can sign in to an identity provider and then obtain temporary security credentials from [[IAM#**AWS Security Token Service (STS)**|AWS STS]].
 
 ## **Amazon DynamoDB Monitoring**
 
 - Automated tools:
-    - **[Amazon CloudWatch](https://tutorialsdojo.com/amazon-cloudwatch/) Alarms** – Watch a single metric over a time period that you specify, and perform one or more actions based on the value of the metric relative to a given threshold over a number of time periods.
-    - **Amazon CloudWatch Logs** – Monitor, store, and access your log files from AWS CloudTrail or other sources.
-    - **Amazon CloudWatch Events** – Match events and route them to one or more target functions or streams to make changes, capture state information, and take corrective action.
-    - **[AWS CloudTrail](https://tutorialsdojo.com/aws-cloudtrail/) Log Monitoring** – Share log files between accounts, monitor CloudTrail log files in real time by sending them to CloudWatch Logs, write log processing applications in Java, and validate that your log files have not changed after delivery by CloudTrail.
-- Using the information collected by CloudTrail, you can determine the request that was made to DynamoDB, the IP address from which the request was made, who made the request, when it was made, and additional details.
+    - **Amazon [[CloudWatch]] Alarms** – Watch a single metric over a time period that you specify, and perform one or more actions based on the value of the metric relative to a given threshold over a number of time periods.
+    - **Amazon [[CloudWatch]] Logs** – Monitor, store, and access your log files from AWS [[CloudTrail]] or other sources.
+    - **Amazon [[CloudWatch]] Events** – Match events and route them to one or more target functions or streams to make changes, capture state information, and take corrective action.
+    - **AWS [[CloudTrail]] Log Monitoring** – Share log files between accounts, monitor [[CloudTrail]] log files in real time by sending them to [[CloudWatch]] Logs, write log processing applications in Java, and validate that your log files have not changed after delivery by [[CloudTrail]].
+- Using the information collected by [[CloudTrail]], you can determine the request that was made to DynamoDB, the IP address from which the request was made, who made the request, when it was made, and additional details.
 
 ## **DynamoDB Accelerator (DAX)** 
 
@@ -266,27 +319,24 @@
 
 - Know the Differences Between Relational Data Design and NoSQL
 
-|   |   |
-|---|---|
-|**Relational database systems (RDBMS)**|**NoSQL database**|
-|In RDBMS, data can be queried flexibly, but queries are relatively expensive and don’t scale well in high-traffic situations.|In a NoSQL database such as DynamoDB, data can be queried efficiently in a limited number of ways, outside of which queries can be expensive and slow.|
-|In RDBMS, you design for flexibility without worrying about implementation details or performance. Query optimization generally doesn’t affect schema design, but normalization is very important.|In DynamoDB, you design your schema specifically to make the most common and important queries as fast and as inexpensive as possible. Your data structures are tailored to the specific requirements of your business use cases.|
-|For an RDBMS, you can go ahead and create a normalized data model without thinking about access patterns. You can then extend it later when new questions and query requirements arise. You can organize each type of data into its own table.|For DynamoDB, by contrast, you shouldn’t start designing your schema until you know the questions it will need to answer. Understanding the business problems and the application use cases up front is essential.<br><br>You should maintain as few tables as possible in a DynamoDB application. Most well designed applications require **only one** table.|
-||It is important to understand three fundamental properties of your application’s access patterns:<br><br>1. Data size: Knowing how much data will be stored and requested at one time will help determine the most effective way to partition the data.<br>    <br>2. Data shape: Instead of reshaping data when a query is processed, a NoSQL database organizes data so that its shape in the database corresponds with what will be queried.<br>    <br>3. Data velocity: DynamoDB scales by increasing the number of physical partitions that are available to process queries, and by efficiently distributing data across those partitions. Knowing in advance what the peak query loads might be helps determine how to partition data to best use I/O capacity.|
+| **Relational database systems (RDBMS)**                                                                                                                                                                                                        | **NoSQL database**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| In RDBMS, data can be queried flexibly, but queries are relatively expensive and don’t scale well in high-traffic situations.                                                                                                                  | In a NoSQL database such as DynamoDB, data can be queried efficiently in a limited number of ways, outside of which queries can be expensive and slow.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| In RDBMS, you design for flexibility without worrying about implementation details or performance. Query optimization generally doesn’t affect schema design, but normalization is very important.                                             | In DynamoDB, you design your schema specifically to make the most common and important queries as fast and as inexpensive as possible. Your data structures are tailored to the specific requirements of your business use cases.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| For an RDBMS, you can go ahead and create a normalized data model without thinking about access patterns. You can then extend it later when new questions and query requirements arise. You can organize each type of data into its own table. | For DynamoDB, by contrast, you shouldn’t start designing your schema until you know the questions it will need to answer. Understanding the business problems and the application use cases up front is essential.<br><br>You should maintain as few tables as possible in a DynamoDB application. Most well designed applications require **only one** table.                                                                                                                                                                                                                                                                                                                                                                                                          |
+|                                                                                                                                                                                                                                                | It is important to understand three fundamental properties of your application’s access patterns:<br><br>1. Data size: Knowing how much data will be stored and requested at one time will help determine the most effective way to partition the data.<br>    <br>2. Data shape: Instead of reshaping data when a query is processed, a NoSQL database organizes data so that its shape in the database corresponds with what will be queried.<br>    <br>3. Data velocity: DynamoDB scales by increasing the number of physical partitions that are available to process queries, and by efficiently distributing data across those partitions. Knowing in advance what the peak query loads might be helps determine how to partition data to best use I/O capacity. |
+
+^e6ec2d
 
 - Design and Use Partition Keys Effectively
     - DynamoDB provides some flexibility in your per-partition throughput provisioning by providing **burst capacity**.
-    - To better accommodate uneven access patterns, **DynamoDB adaptive capacity** enables your application to continue reading and writing to ‘hot’ partitions without being throttled,  by automatically increasing throughput capacity for partitions that receive more traffic.
-
-![AWS Training Amazon DynamoDB 4](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-Amazon-DynamoDB-4.jpg)
-
+    - To better accommodate uneven access patterns, **DynamoDB adaptive capacity** enables your application to continue reading and writing to ‘hot’ partitions without being throttled,  by automatically increasing throughput capacity for partitions that receive more traffic.![AWS Training Amazon DynamoDB 4](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-Amazon-DynamoDB-4.jpg)
 - - Amazon DynamoDB now applies adaptive capacity in real time in response to changing application traffic patterns, which helps you maintain uninterrupted performance indefinitely, even for imbalanced workloads. In addition, instant adaptive capacity helps you provision read and write throughput more efficiently instead of overprovisioning to accommodate uneven data access patterns. Instant adaptive capacity is on by default at no additional cost for all DynamoDB tables and global secondary indexes.
     - The optimal usage of a table’s provisioned throughput depends not only on the workload patterns of individual items, but also on the partition-key design. In general, you will use your provisioned throughput more efficiently as the ratio of partition key values accessed to the total number of partition key values increases.
     - Structure the primary key elements to avoid one heavily requested partition key value that slows overall performance.
     - Distribute loads more evenly across a partition key space by adding a random number to the end of the partition key values. Then you randomize the writes across the larger space.
     - A randomizing strategy can greatly improve write throughput, but it’s difficult to read a specific item because you don’t know which suffix value was used when writing the item. Instead of using a random number to distribute the items among partitions, use a number that you can calculate based upon something that you want to query on.
     - Distribute write activity efficiently during data upload by using the sort key to load items from each partition key value, keeping more DynamoDB servers busy simultaneously and improving your throughput performance.
-
 - Use Sort Keys to Organize Data
     - Well-designed sort keys gather related information together in one place where it can be queried efficiently.
     - Composite sort keys let you define hierarchical (one-to-many) relationships in your data that you can query at any level of the hierarchy.

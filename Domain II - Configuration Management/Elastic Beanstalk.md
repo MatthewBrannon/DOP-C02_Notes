@@ -1,4 +1,4 @@
-## AWS Elastic Beanstalk Cheat Sheet
+## AWS Elastic Beanstalk
 
 - Allows you to quickly deploy and manage applications in the AWS Cloud without worrying about the infrastructure that runs those applications.
 - Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring for your applications.
@@ -17,9 +17,7 @@
     - Puma
 - Elastic Beanstalk supports Docker containers.
 - Elastic Beanstalk Workflow
-
-![AWS Training Elastic Beanstalk](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/Elastic.jpg)
-
+	- ![AWS Training Elastic Beanstalk](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/Elastic.jpg)
 - Your application’s domain name is in the format:  
     _subdomain_._region_.elasticbeanstalk.com
 

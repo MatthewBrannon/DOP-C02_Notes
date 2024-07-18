@@ -1,4 +1,4 @@
-## AWS CloudFormation Cheat Sheet
+## AWS CloudFormation
 
 - A service that gives developers and businesses an easy way to create a collection of related AWS resources and provision them in an orderly and predictable fashion.
 ## **Features**
@@ -25,9 +25,7 @@
 - **Change Sets**
     - Before updating your stack and making changes to your resources, you can generate a change set, which is a summary of your proposed changes.
     - Change sets allow you to see how your changes might impact your running resources, especially for critical resources, before implementing them.
-
-![AWS Training AWS CloudFormation 2](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-AWS-CloudFormation-2.jpg)
-
+    - ![AWS Training AWS CloudFormation 2](https://td-mainsite-cdn.tutorialsdojo.com/wp-content/uploads/2018/12/AWS-Training-AWS-CloudFormation-2.jpg)
 - With AWS CloudFormation and AWS [[CodePipeline]], you can use continuous delivery to automatically build and test changes to your CloudFormation templates before promoting them to production stacks.
 - _CloudFormation artifacts_ can include a stack template file, a template configuration file, or both. AWS [[CodePipeline]] uses these artifacts to work with CloudFormation stacks and change sets.
     - **Stack Template File** – defines the resources that CloudFormation provisions and configures. You can use YAML or JSON-formatted templates.
@@ -61,7 +59,7 @@
 
 ## **StackSets**
 
-- CloudFormation StackSets allow you to roll out CloudFormation stacks over multiple AWS accounts and in multiple Regions with just a couple of clicks. StackSets is commonly used together with AWS Organizations to centrally deploy and manage services in different accounts.
+- CloudFormation StackSets allow you to roll out CloudFormation stacks over multiple AWS accounts and in multiple Regions with just a couple of clicks. StackSets is commonly used together with AWS [[Organizations]] to centrally deploy and manage services in different accounts.
 - Administrator and target accounts – An _administrator account_ is the AWS account in which you create stack sets. A stack set is managed by signing in to the AWS administrator account in which it was created. A _target account_ is the account into which you create, update, or delete one or more stacks in your stack set.
 - In addition to the organization’s management account, you can delegate other administrator accounts in your AWS Organization that can create and manage stack sets with service-managed permissions for the organization.
 - Stack sets – A _stack set_ lets you create stacks in AWS accounts across regions by using a single CloudFormation template. All the resources included in each stack are defined by the stack set’s CloudFormation template. A stack set is a regional resource.
@@ -74,7 +72,7 @@
 - You can also perform drift detection on a stack set to determine if any of the stack instances have drifted.
 - Stack import operations:
     - Self-managed StackSets – Stacks can be imported into the administrator account or into other target accounts and AWS Regions.
-    - Service-managed StackSets – Any stack in the same AWS Organizations as the management account can be imported.
+    - Service-managed StackSets – Any stack in the same AWS [[Organizations]] as the management account can be imported.
 
 ## **AWS CloudFormation Monitoring**
 
@@ -82,8 +80,8 @@
 
 ## **AWS CloudFormation Security**
 
-- You can use IAM with CloudFormation to control what users can do with AWS CloudFormation, such as whether they can view stack templates, create stacks, or delete stacks.
-- A _service role_ is an IAM role that allows CloudFormation to make calls to resources in a stack on your behalf. You can specify an IAM role that allows CloudFormation to create, update, or delete your stack resources.
+- You can use [[IAM]] with CloudFormation to control what users can do with AWS CloudFormation, such as whether they can view stack templates, create stacks, or delete stacks.
+- A _service role_ is an [[IAM]] role that allows CloudFormation to make calls to resources in a stack on your behalf. You can specify an [[IAM]] role that allows CloudFormation to create, update, or delete your stack resources.
 - You can improve the security posture of your VPC by configuring CloudFormation to use an interface VPC endpoint.
 
 ## **AWS CloudFormation Pricing**

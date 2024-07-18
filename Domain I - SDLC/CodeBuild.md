@@ -1,10 +1,10 @@
-## AWS CodeBuild Cheat Sheet
+## AWS CodeBuild
 
 - A fully managed **continuous integration service** that compiles source code, runs tests, and produces software packages that are ready to deploy.
 
 ## **Concepts**
 
-- - A **build project** defines how [[CodeBuild]] will run a build. It includes information such as where to get the source code, which build environment to use, the build commands to run, and where to store the build output.
+- A **build project** defines how [[CodeBuild]] will run a build. It includes information such as where to get the source code, which build environment to use, the build commands to run, and where to store the build output.
     - A **build environment** is the combination of operating system, programming language runtime, and tools used by [[CodeBuild]] to run a build.
     - The **build specification** is a YAML file that lets you choose the commands to run at each phase of the build and other settings. Without a build spec, [[CodeBuild]] cannot successfully convert your build input into build output or locate the build output artifact in the build environment to upload to your output bucket.
         - If you include a build spec as part of the source code, by default, the build spec file must be named buildspec.yml and placed in the root of your source directory.
@@ -12,7 +12,7 @@
 
 ## **Features**
 
-- - AWS CodeBuild runs your builds in preconfigured build environments that contain the operating system, programming language runtime, and build tools (such as Apache Maven, Gradle, npm) required to complete the task. You just specify your source code’s location and select settings for your build, such as the build environment to use and the build commands to run during a build.
+- AWS CodeBuild runs your builds in preconfigured build environments that contain the operating system, programming language runtime, and build tools (such as Apache Maven, Gradle, npm) required to complete the task. You just specify your source code’s location and select settings for your build, such as the build environment to use and the build commands to run during a build.
     - AWS CodeBuild builds your code and stores the artifacts into an [[S3]] bucket, or you can use a build command to upload them to an artifact repository.
     - AWS CodeBuild provides build environments for
         - Java
@@ -52,7 +52,7 @@
 
 ## **Monitoring and Security**
 
-- - You can specify a key stored in the [AWS Key Management Service](https://tutorialsdojo.com/aws-key-management-service-aws-kms/) to encrypt your artifacts.
+- You can specify a key stored in the AWS [[KMS|Key Management Service]] to encrypt your artifacts.
     - CodeBuild provides security and separation at the infrastructure and execution levels.
     - You can use Amazon [[CloudWatch]] to watch your builds, report when something is wrong, and take automatic actions when appropriate.
     - You can monitor your builds at two levels:
@@ -62,4 +62,4 @@
 
 ## **AWS CodeBuild Pricing**
 
-- - You are charged for compute resources based on the duration it takes for your build to execute. The per-minute rate depends on the compute type you use.
+- You are charged for compute resources based on the duration it takes for your build to execute. The per-minute rate depends on the compute type you use.
