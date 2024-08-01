@@ -1,0 +1,18 @@
+- A Docker-based app hosted on [[ECS|Amazon ECS]] cluster with Multiple [[ECS]] services to run its various workloads. The cluster is configured to use an Application Load Balancer to distribute traffic evenly. The goal is to configure the cluster to automatically collect logs from all the services and upload them to a S3 bucket. 
+	- Create the required [[IAM]] policy and attach it to the `escInstanceRole` . Install the [[CloudWatch#**CloudWatch Logs**|CloudWatch Logs]] agent on the [[ECS]] instances. use the `awslogs` Log Driver in the task definition.
+	- Capture detailed information about requests sent to your load balancer by enabling access logging on the  Application Load Balancer. Configure it to store the logs to the [[S3]] bucket.
+	- Create a [[CloudWatch#**CloudWatch Logs**|CloudWatch Logs]] subscription filter integrated with [[Kinesis]] to analyze the logs. Config the [[CloudWatch#**CloudWatch Logs**|CloudWatch Logs]] to export the logs to an [[S3]] bucket
+- Access logging is an optional feature of Elastic Load Balancing that is disabled by default. After you enable access logging for you load balancer, Elastic Load Balancing captures the logs and stores them in the [[S3]] bucket that you specify as compressed files. 
+- [[CloudWatch]] can't directly send a message to a Slack Channel or an outside media. You have to use a [[CloudWatch#**CloudWatch Events (Amazon EventBridge )**|CloudWatch Events]] with an associated [[Lambda]] function to send the data outside of AWS.
+- [[CodeDeploy]] deployments can be monitored with [[CloudWatch#**CloudWatch Events (Amazon EventBridge )**|CloudWatch Events]], CloudWatch Alarms, and [[CloudWatch#**CloudWatch Logs**|CloudWatch Logs]].
+- You can use [[CloudWatch#**CloudWatch Events (Amazon EventBridge )**|CloudWatch Events]] to detect and react to changes in the state of an instance or a deployment (an "event") in your [[CodeDeploy]] operations. Then, based on rules you create, [[CloudWatch#**CloudWatch Events (Amazon EventBridge )**|CloudWatch Events]] will invoke one or more target actions when a deployment or instance enters the state you specify in a rule. Depending on the type of state change, you might want to send notifications, capture state information, take corrective action, initiate events, or take other actions.
+	- You can select the following types of targets when using [[CloudWatch#**CloudWatch Events (Amazon EventBridge )**|CloudWatch Events]] as part of your CodeDeploy operations:
+		- [[Lambda|Lambda Functions]]
+		- [[Kinesis#**Kinesis Data Stream**|Kinesis Streams]]
+		- [[SQS]] queues
+		- Built-in targets ([[CloudWatch]] alarm actions)
+		- [[SNS#**SNS Topics**|SNS Topics]]
+- The `cloudtrail-enabled` checks whether [[CloudTrail]] is enabled in your AWS account. Optionally, you can specify which [[S3]] bucket, [[SNS]] topic, and [[CloudWatch#**CloudWatch Logs**|CloudWatch Logs]] ARN to use.
+- **[[Config|AWS Config]]** provides _AWS managed rules_, which are predefined, customizable rules that [[Config]] uses to evaluate whether your AWS resources comply with common best practices
+- To determine whether a log file was modified, deleted, or unchanged after [[CloudTrail]] delivered it, you can use [[CloudTrail]] log file integrity validation. This feature is built using industry-standard algorithms: SHA-256 for hashing and SHA-256 with RSA for digital signing. This makes it computationally infeasible to modify, delete or forge [[CloudTrail]] log files without detection. You can use the AWS CLI to validate the files in the location where [[CloudTrail]] delivered them.
+- 
